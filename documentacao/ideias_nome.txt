@@ -1,0 +1,10 @@
+IndusHub
+RobHub
+SensorMC
+Hard
+AutoWare
+ByteWare
+TeraHard
+SeHardware
+
+No momento, a ideia de nome escolhida foi "ByteWare"
