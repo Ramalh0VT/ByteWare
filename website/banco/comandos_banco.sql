@@ -1,11 +1,3 @@
-CREATE TABLE IF NOT EXISTS teste(
-id INT PRIMARY KEY AUTO_INCREMENT
-);
-
-SHOW TABLES;
-
-DROP TABLE teste;
-
 CREATE TABLE IF NOT EXISTS administradores(
 id_administrador INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(200) UNIQUE NOT NULL,
@@ -67,13 +59,3 @@ CONSTRAINT fk_produto2
 FOREIGN KEY (id_produto)
 REFERENCES produtos(id_produto)
 );
-
-
-
-ALTER TABLE administradores ADD COLUMN rad VARCHAR(500) NOT NULL; 
-
-DESCRIBE alocacao;
-
-DESCRIBE administradores;
-
-
