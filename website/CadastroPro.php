@@ -26,7 +26,6 @@
                 <option value="reles">Relés</option>
                 <option value="inv_freq">Inversores de Frequência</option>
             </select>
-
             <button type="submit" class="btn">Cadastrar</button>
         </form>
     </main>
