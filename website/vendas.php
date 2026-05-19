@@ -12,11 +12,13 @@
         <header>
             <nav class="nav">
                 <a href="vendas.php"><img src="./imagens/logo.png" alt="" class="logo"/></a>
+                <a href="vendas.php" class="nome">ByteWare</a>
                 <a href="vendas.php" class="carrinho"><i class="bi bi-cart3"></i></a>
 
                 <div class="log">
-                    <a href="login.php"><i class="bi bi-person-fill"></i></a>
-                    <a href="form_cadastro.php"></a>
+                    <a href="login.php" class="logi"><i class="bi bi-person-fill">login</i></a>
+                    <a href="form_cadastro.php" class="cad"><i class="bi bi-person-plus-fill">Cadastro</i></a>
+                    
                 </div>
             </nav>
         </header>
