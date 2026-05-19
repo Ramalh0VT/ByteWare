@@ -13,10 +13,7 @@
             <input type="text" id="produto" name="nome" class="inp" placeholder="Nome do Produto">
             <input type="number" id="preco" name="preco" class="inp" placeholder="Preço">
             <input type="number" id="qtd" name="qtd" class="inp" placeholder="Quantidade">
-            <input type="number" id="peso" name="peso" class="inp" placeholder="Peso">
-            <input type="text" id="fabricante" name="fabricante" class="inp" placeholder="Fabricante/Marca">
-            <input type="text" id="pn" name="pn" class="inp" placeholder="Part Number">
-            <input type="text" name="ean" id="ean" class="inp" placeholder="Código EAN/GTIN">
+            <label for="categoria">Categoria</label>
             <select name="categoria" id="categoria" class="cat">
                 <option value="" disabled selected>Selecione uma opção...</option>
                 <option value="sensores">Sensores</option>
@@ -26,6 +23,9 @@
                 <option value="reles">Relés</option>
                 <option value="inv_freq">Inversores de Frequência</option>
             </select>
+            <input type="text" id="pn" name="pn" class="inp" placeholder="Part Number">
+
+
             <button type="submit" class="btn">Cadastrar</button>
         </form>
     </main>

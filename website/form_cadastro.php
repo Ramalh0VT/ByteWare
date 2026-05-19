@@ -37,10 +37,8 @@ $erro = $_GET['erro'] ?? null;
                 echo '<label class="senha_incorreta">Senha Incorreta</label>';
             }
             ?>
-
             <input type="checkbox">
             <label class="label_form">Eu concordo com os Termos de Privacidade</label>
-
             <button type="submit" class="botao_form">Cadastrar</button>
     </div>
 
