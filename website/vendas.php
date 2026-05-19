@@ -4,16 +4,19 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>ByteWare</title>
+        <link rel="stylesheet" href="./css/global.css">
+        <link rel="stylesheet" href="./css/index.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
     </head>
     <body>
         <header>
             <nav class="nav">
-                <a href="index.php"><img src="./imagens/logo.png" alt="" class="logo"/></a>
-                
+                <a href="vendas.php"><img src="./imagens/logo.png" alt="" class="logo"/></a>
+                <a href="vendas.php" class="carrinho"><i class="bi bi-cart3"></i></a>
 
                 <div class="log">
-                    <p class="receber">Bem-vindo de volta <b>Victor</b></p>
-                    <img src="./imagens/noneperfil.png" alt="" class="perfil"/>
+                    <a href="login.php"><i class="bi bi-person-fill"></i></a>
+                    <a href="form_cadastro.php"></a>
                 </div>
             </nav>
         </header>
