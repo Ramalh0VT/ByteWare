@@ -39,23 +39,25 @@ custo NUMERIC(14,2)
 );
 
 CREATE TABLE IF NOT EXISTS compra (
-id_cliente INT,
-CONSTRAINT fk_cliente
+id_cliente INT NOT NULL,
+CONSTRAINT fk_cliente_co
 FOREIGN KEY (id_cliente)
 REFERENCES clientes(id_cliente),
-id_produto INT,
-CONSTRAINT fk_produto
+id_produto INT NOT NULL,
+CONSTRAINT fk_produto_co
 FOREIGN KEY (id_produto)
-REFERENCES produtos(id_produto)
+REFERENCES produtos(id_produto),
+PRIMARY KEY (id_cliente, id_produto)
 );
 
 CREATE TABLE IF NOT EXISTS alocacao(
-id_cliente INT,
-CONSTRAINT fk_cliente2
+id_cliente INT NOT NULL,
+CONSTRAINT fk_cliente_al
 FOREIGN KEY (id_cliente)
 REFERENCES clientes(id_cliente),
-id_produto INT,
-CONSTRAINT fk_produto2
+id_produto INT NOT NULL,
+CONSTRAINT fk_produto_al
 FOREIGN KEY (id_produto)
-REFERENCES produtos(id_produto)
+REFERENCES produtos(id_produto),
+PRIMARY KEY (id_cliente, id_produto)
 );
