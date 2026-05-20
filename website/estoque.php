@@ -1,3 +1,11 @@
+f (isset($_GET['erro'])){
+	$erro = $_GET['erro'];
+	if ($erro === 'erro_linkinvalido'){	
+	 echo '<h1 class="msg_erro">Erro: Esse link que você tentou acessar é invalido.</h1>' ;
+	}	
+}	
+
+?>
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -45,7 +53,8 @@
                             <th>Estoque</th>
                             <th>Status</th>
                             <th>Categoria</th>
-                            <th>Custo</th>   <th>Ajustes</th>
+			    <th>Custo</th>   
+			    <th>Ajustes</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,35 +64,45 @@
                         $conteudo_tabela = null;
                         foreach($produtos as $produto){
                             if ($produto['estoque'] > 50 ){
-                                $status = '';
+                                $status = 'estoque_padrao';
                             }
                             elseif ($produto['estoque'] <= 50 && $produto['estoque'] > 10){
                                 $status = 'estoque_baixo';
                             }
-                            elseif ($produto['estoque'] <= 10){
+                            elseif ($produto['estoque'] <= 10 && $produto['estoque'] > 0){
                                 $status = 'estoque_mtbaixo';
                             }
                             elseif($produto['estoque'] <= 0){
                                 $dados_atualizados = [
-                                'ativo' => FALSE,
-                                'estoque' => 0
-                                ];
-                                $status_db = update($pdo, 'produtos', $dados_atualizados, "id=".$produto['id_produto']."");
+                                'estoque' => 0,
+                                'ativo' => 0
+				];
+                                $status_db = update($pdo, 'produtos', $dados_atualizados, 'id_produto='.$produto['id_produto'].''); 
                                 $status = 'estoque_zerado';
-                            }
-                            $atividade = null;
-                            if ($produto['ativo'] == TRUE){
-                                $atividade = 'Ativo';                            
-                                }
-                            else{
-                                $atividade = 'Inativo';
-                            }
-                            $conteudo_tabela .= '<tr class='.$status.'><td>'.$produto['id_produto'].'</td><td>'.$produto['nome_produto'].'</td><td>'.$produto['pn'].'</td><td>'.$produto['estoque'].'</td><td>'.$atividade.'</td><td>'.$produto['categoria'].'</td><td>'.$produto['custo'].'</td><td><a href=descricaoPro.php><i class="bi bi-eye"></i></a></td>';
-                        } 
-                        echo $conteudo_tabela;
-                    ?>
-                    </tbody>
-                </table>
-            </section>
-    </body>
-</html>
+			    }
+
+			    			    if ($produto['custo'] < 0){
+							    				    $dados_atualizados = 
+												    					    [
+																		    						'custo' => 0
+																													    ];	
+											                                    $status_db = update($pdo, 'produtos', $dados_atualizados, 'id_produto='.$produto['id_produto'].''); 
+											    			  }
+			                                $atividade = null;
+			                                if ($produto['ativo'] == TRUE){
+								                                $atividade = 'Ativo';                            
+												                                }
+							                            else{
+											                                    $atividade = 'Inativo';
+															                                }
+							                            $conteudo_tabela .= '<tr class='.$status.'><td>'.$produto['id_produto'].'</td><td>'.$produto['nome_produto'].'</td><td>'.$produto['pn'].'</td><td>'.$produto['estoque'].'</td><td>'.$atividade.'</td><td>'.$produto['categoria'].'</td><td>'.$produto['custo'].'</td><td><form action = "edit_prod.php" method="GET"><button value='.$produto['id_produto'].' name="p_editar"><i class="bi bi-eye"></i></button></form></td>';
+
+							                        } 
+			                        echo $conteudo_tabela;
+			                    ?>
+						                        </tbody>
+									                </table>
+											            </section>
+												        </body>
+													</html>
+
