@@ -68,11 +68,12 @@
                     </thead>
 
 
-                    
+                  <tbody>  
                     <?php
                         require_once 'crud.php';
                         $produtos = readAll($pdo, 'produtos');
-                        $conteudo_tabela = null;
+                        $conteudo_tabela = null; 
+                        $conteudo_tabela_zerada = null;                      
                         foreach($produtos as $produto){
                             $zerado = false;
                             if ($produto['estoque'] > 50 ){
@@ -88,32 +89,32 @@
                                 $dados_atualizados = [
                                 'estoque' => 0,
                                 'status' => 0
-				];
+				                ];
                                 $status_db = update($pdo, 'produtos', $dados_atualizados, 'id_produto='.$produto['id_produto'].''); 
                                 $status = 'estoque_zerado';
-                                $zerado = true;
-			    }
+                                
+							                }
 
-			    			    if ($produto['custo'] < 0){
-							    				    $dados_atualizados = 
-												    					    [
-																		    						'preco' => 0
-																													    ];	
-											                                    $status_db = update($pdo, 'produtos', $dados_atualizados, 'id_produto='.$produto['id_produto'].''); 
-											    			  }
+			    			              if ($produto['custo'] < 0){
+								      				            $dados_atualizados = 
+														                                        [
+																				                                    'preco' => 0
+																								                                        ];	
+													                                    $status_db = update($pdo, 'produtos', $dados_atualizados, 'id_produto='.$produto['id_produto'].''); 
+													    			                }
 			                                $atividade = null;
-			                                if ($produto['ativo'] == TRUE){
+			                                if ($produto['status'] == TRUE){
 								                                $atividade = 'Ativo';                            
 												                                }
 							                            else{
 											                                    $atividade = 'Inativo';
 															                                }
 							                            if ($zerado == false){
-											                                $conteudo_tabela .= '<tr class='.$status.'><td>img src="'.$produto['imagem'].' alt="Imagem""></td><td>'.$produto['id_produto'].'</td><td>'.$produto['nome_produto'].'</td><td>'.$produto['pn'].'</td><td>'.$produto['estoque'].'</td><td>'.$atividade.'</td><td>'.$produto['categoria'].'</td><td>'.$produto['preco'].'</td><td><form action="descricaoPro.php" method="GET"><button value='.$produto['id_produto'].' name="p_editar"><i class="bi bi-eye"></i></button></form></td>';
-															                            }
+											                                    $conteudo_tabela .= '<tr class='.$status.'><td>img src="'.$produto['imagem'].' alt="Imagem""></td><td>'.$produto['id_produto'].'</td><td>'.$produto['nome_produto'].'</td><td>'.$produto['pn'].'</td><td>'.$produto['estoque'].'</td><td>'.$atividade.'</td><td>'.$produto['categoria'].'</td><td>'.$produto['preco'].'</td><td><form action="descricaoPro.php" method="GET"><button value='.$produto['id_produto'].' name="p_editar"><i class="bi bi-eye"></i></button></form></td>';
+															                                }
 							                            else{
-											                                $conteudo_tabela_zerada .= '<tr class='.$status.'><td>img src="'.$produto['imagem'].' alt="Imagem""></td><td>'.$produto['id_produto'].'</td><td>'.$produto['nome_produto'].'</td><td>'.$produto['pn'].'</td><td>'.$produto['estoque'].'</td><td>'.$atividade.'</td><td>'.$produto['categoria'].'</td><td>'.$produto['preco'].'</td><td><form action="descricaoPro.php" method="GET"><button value='.$produto['id_produto'].' name="p_editar"><i class="bi bi-eye"></i></button></form></td>'; 
-															                            }
+											                                    $conteudo_tabela_zerada .= '<tr class='.$status.'><td>img src="'.$produto['imagem'].' alt="Imagem""></td><td>'.$produto['id_produto'].'</td><td>'.$produto['nome_produto'].'</td><td>'.$produto['pn'].'</td><td>'.$produto['estoque'].'</td><td>'.$atividade.'</td><td>'.$produto['categoria'].'</td><td>'.$produto['preco'].'</td><td><form action="descricaoPro.php" method="GET"><button value='.$produto['id_produto'].' name="p_editar"><i class="bi bi-eye"></i></button></form></td>'; 
+															                                }
 							                        }
 			                        echo $conteudo_tabela;
 			                ?>
@@ -138,6 +139,9 @@
 			                <th>Descrição</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <?=$conteudo_tabela_zerada?>
+                    </tbody>
                     </table>
 </section>
     </body>
