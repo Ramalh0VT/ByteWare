@@ -63,4 +63,37 @@ require_once 'partials/navbar.php';
                     <span>Frete:</span>
                     <span>Grátis</span>
                 </div>
+                <div class="linha">
+                    <span>Total:</span>
+                    <span>Total Parcial + Frete(sempre grátis)</span>
+                </div>
+                <button class="finalizar">Finalizar Compra</button>
+            </div>
+        </div>
 
+        <div class="recomendados">
+            <h2>Produtos Recomendados</h2>
+            <div class="gridProd">
+                <div class="card">
+                    <img src="#">
+                    <h3>Produto de Teste</h3>
+                    <p class="preco_card">R$00.00</p>
+                    <button>Comprar</button>
+                </div>
+
+                <div class="card">
+                    <img src="#">
+                    <h3>Produto de Teste 2</h3>
+                    <p class="preco_card">R$00.00</p>
+                    <button>Comprar</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+        <?php
+        require_once 'partials/footer.php';
+        ?>
+</body>
+
+</html>

@@ -2,20 +2,17 @@
 require_once 'crud.php';
 $titulo = 'Editar de produtos';
 $css = './css/cadastroPro.cssd';
-require_once './partials/sidebar.php';
+// require_once './partials/sidebar.php';
 $id = null;
 $erro = null;
 $msg = null;  
-if(isset($_GET['erro2'])){
-    $msg = $_GET['erro2'] ?? null;
-    if($msg === '1'){
-        $msg = '<h1 class="msg">Formato de arquivo não permítido! Os formatos permitidos são png e jpg/jpeg Erro:'.$_GET['erro2'].'</h1>';
+if(isset($_GET['erro'])){
+    $msg = $_GET['erro'];
+    if($msg === '3'){
+        $msg = '<h1 class="msg">Algum erro desconhecido ocorreu com a sua imagem</h1>';
     }
-    elseif($msg === '2'){
-        $msg = '<h1 class="msg">Tamanho de arquivo muito grande!O tamanho máximo é 10MB Erro: '.$_GET['erro2'].'</h1>';
-    }
-    elseif($msg === '3'){
-        $msg = '<h1 class="msg">Algum erro ocorreu com a sua imagem Erro: '.$_GET['erro2'].'</h1>';
+    elseif($msg === '4'){
+        $msg = '<h1 class="msg">A sua imagem tem tamanho acima de 10MB ou não é PNG ou JPG/JPEG. Tente novamente</h1>';
     }
     else{
         $msg = '<h1 class="msg">Um erro desconhecido ocorreu.</h1>';
@@ -38,37 +35,23 @@ $produto = read($pdo,'produtos',"id_produto=$id");
 
 // O UPDATE PROPRIAMENTE DITO 
 
-
-
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
-
 $tipos_permitidos = ['image/jpeg','image/png','image/jpg'];
-
-if(!in_array($_FILES['imagem']['type'],$tipos_permitidos) && !isset($_FILES['imagem'])){
-    echo '<h1 class="msg_erro">Tipo de imagem não permitido! Os tipos permitidos são png e jpg/jpeg.</h1>';
-}
-
-elseif(in_array($_FILES['imagem']['type'],$tipos_permitidos)){
 $tamanho_max = 10 * 1024 * 1024;
 
-if ($_FILES['imagem']['size'] > $tamanho_max){
-    echo '<h1 class="msg_erro">Arquivo muito grande! O tamanho máximo é de '.$tamanho_max.'</h1>';
-    die();
-}
-
-if (isset($_FILES['imagem'])){
+if (isset($_FILES['imagem']) && in_array($_FILES['imagem']['type'],$tipos_permitidos) && $_FILES['imagem']['size'] <= $tamanho_max){
 $extensao = pathinfo($_FILES['imagem']['name'],PATHINFO_EXTENSION);
 $nome_img = 'produto_'.$id.'.'.$extensao.'';
 $dir = './';
 $caminho = $dir.'uploads/';
 $arquivo = $caminho.$nome_img;
-if (move_uploaded_file($_FILES['imagem']['tmp_name'],$arquivo)){
-    update($pdo, 'produtos', ['imagem' => $arquivo], "id_produto=$novo_produto_real");
+
+if (move_uploaded_file($_FILES['imagem']['tmp_name'],$)){
+    update($pdo, 'produtos', ['imagem' => $arquivo], "id_produto=$id");
 }
-else{
+if ($pife){
     header('Location: form_update.php?id='.$id.'&erro=3');
     die();
-}
 }
 
 $dados = [
@@ -78,15 +61,17 @@ $dados = [
     'estoque' => htmlspecialchars(trim($_POST['estoque'])),
     'categoria' => htmlspecialchars(trim($_POST['categoria'])),
     'descricao' => htmlspecialchars(trim($_POST['descricao'])),
-    'imagem' => htmlspecialchars(trim(''))
 ];
     update($pdo,'produtos',$dados,'id_produto='.$id.'');
-    header('Location:: form_update.php?atualizado=1');
+    header('Location: form_update.php?atualizado=1');
     die();
-
-
 }
- }
+else{
+    header('Location: form_update.php?id='.$id.'&erro=4');
+}
+}
+
+
 
 // CORPO DO HTML 
 

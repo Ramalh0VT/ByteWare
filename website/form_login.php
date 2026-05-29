@@ -22,13 +22,13 @@ $login_invalido = $_GET['erro'] ?? null;
                 <label for="email">E-mail</label>
             </div>
 
-            <input type="text" placeholder="Insira o seu e-mail" id="email" name="email-login" class="inp">
+            <input type="text" placeholder="Insira o seu e-mail" id="email" maxlength="500" name="email-login" class="inp">
 
             <div class="rotulo">
                 <i class="bi bi-lock"></i>
                 <label for="senha">Senha</label>
             </div>
-            <input type="text" placeholder="Insira a sua senha" id="senha" name="senha-login" class="inp">
+            <input type="text" placeholder="Insira a sua senha" id="senha" name="senha-login" maxlength="1000" class="inp">
 
             <button type="submit" class="btn">Login</button>
             <?php
@@ -37,9 +37,8 @@ $login_invalido = $_GET['erro'] ?? null;
             }
             elseif($login_invalido =='restrito');
             ?>
-
             <div class="redirecionar">
-                <p>Ainda não se cadastrou? <a href="form_cadastro.php" class="cdt">Acesse aqui</a> </p>
+                <p>Ainda não se cadastrou? <a href="form_cadastro.php" class="cdt">Acesse aqui</a></p>
             </div>
         </form>
     </div>
