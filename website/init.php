@@ -1,20 +1,89 @@
 <?php
-require_once 'crud.php';
-session_start();
+
+    $titulo = 'Byteware';
+    $css = './css/index.css';
+    require_once 'crud.php';
+    $filtro = $_GET['filtro'] ?? null;
+
 ?>
+        <?php
+            include 'partials/navbar.php';
+        ?>
+    <body>
 
 
+        <main>
+            <section class="filtro">
+                <form method="get" action="index.php">
+                    <select name="filtro" id="">
+                        <option value="0a100">Filtre por preço:</option>
+                        <option value="101a300">Preço</option>
+                        <option value="301a500">Preço</option>
+                        <option value="501a800">Preço</option>
+                        <option value="801a1500">Preço</option>
+                        <option value="acimaDe1500">Preço</option>
+                    </select>
+                </form>
+            </section>
 
-<?php
-// Se o session clientes ainda estiver vazio e o post email-login também, significa que a pessoa não clicou no botão de login no form e ainda não foi criado o session
-if (!isset($_SESSION['clienteLogado']) && !isset($_SESSION['admlogado']) && !isset($_POST['email-login'])) {
-    header('Location: form_login.php?erro=restrito');
-    exit;
-}
+            
+            <section class="filtro">
+                <div class="categorias">
+                    <h3><a href="index.php">Todos</a></h3>
+                    <h3><a href="index.php?filtro=sensor">Sensores</a> </h3>
+                    <h3><a href="index.php?filtro=clp">CLPs</a> </h3>
+                    <h3><a href="index.php?filtro=ihm">IHMs</a> </h3>
+                    <h3><a href="index.php?filtro=rele">Relés</a> </h3>
+                    <h3><a href="index.php?filtro=fonte_industrial">Fontes industriais</a> </h3>
+                    <h3><a href="index.php?filtro=inversor_frequencia">Inversores de frequência</a> </h3>
+                </div>
+            </section>
+            
 
-// Se passou pela verificação de cima, aqui agora vai verificar se a pessoa clicou no botão de login e o post email está com algo, se estiver vai rodar o validacaologin.php
-if (isset($_POST['email-login'])) {
-    require_once 'validacaologin.php';
-    exit;
-}
-?>
+            <?php
+            if($filtro === null) {
+            ?>
+                <section class="prateleira">
+                    <?php
+                    $produtos = readAll($pdo, 'produtos', null);
+                    foreach($produtos as $produto) {
+                        print '
+                        <a href="./infoproduto.php?id='.$produto['id_produto'].'" class="card">
+                        <img src="'.$produto['imagem'].'" />
+                        <p>'.$produto['nome_produto'].'</p>
+                        <p class="preco"><p class="">R$</p>'.number_format((float)$produto['preco'], 2, ',', '.').'</p>
+                        </a>';
+                    };
+                ?>
+                </section>
+            <?php
+            }
+
+    
+
+            elseif($filtro == 'sensor' || $filtro == 'clp' || $filtro == 'ihm' || $filtro == 'fonte_industrial' ||  $filtro == 'reles' ||  $filtro == 'inversor_frequencia') {
+                $filtroCategoria = $filtro;
+                ?>
+                <section class="prateleira">
+                    <?php
+                    $produtos = readAll($pdo, 'produtos', "categoria = '$filtroCategoria'");
+                    foreach($produtos as $produto) {
+                        print '
+                        <a href="./infoproduto.php?id='.$produto['id_produto'].'" class="card">
+                        <img src="'.$produto['imagem'].'" />
+                        <p>'.$produto['nome_produto'].'</p>
+                        <p class="preco"><p class="">R$</p>'.number_format((float)$produto['preco'], 2, ',', '.').'</p>
+                        </a>';
+                    };
+                    ?>
+                </section>
+                <?php
+            }
+            ?>
+        </main>
+
+        <?php
+        require_once 'partials/footer.php';
+        ?>
+    </body>
+</html>
