@@ -60,7 +60,7 @@
             }
             ?>
             <!-- <input type="text" name="descricao" class="inp" placeholder ="Descrição" required>--> 
-            <textarea name="descricao" rows="4" cols="50" maxlength="1000" placeholder="Insira a descrição do produto" required></textarea>
+            <textarea class="textarea" name="descricao" rows="4" cols="50" maxlength="1000"  placeholder="Insira a descrição do produto" required></textarea>
 
             <label for="imagem" class="imagem">Upload</label>
             <input type="file" id="imagem" name="imagem" class="inp" required>
