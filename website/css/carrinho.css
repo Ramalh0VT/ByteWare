@@ -1,0 +1,339 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+}
+
+body{
+    background: radial-gradient(circle at bottom right, #93C5FD 5%, transparent 30%), #F1F7FD
+    radial-gradient(circle at top left, #60A5FA 0%, transparent 30%) no-repeat;
+}
+
+main{
+    min-height: 100vh;
+    padding: 20px;
+    width: 100%;
+    max-width: 1400px;
+    margin: auto;
+}
+
+.carrinho{
+    display: grid;
+    height: auto;
+    grid-template-columns: 3fr 1fr;
+    gap: 50px;
+    margin-top: 40px;
+    padding: 60px;
+}
+
+.produtos{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.produto{
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    box-shadow: 10px 8px 26px 6px rgba(0,0,0,0.85);
+}
+
+.produto img{
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.informacoes h2{
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.informacoes p{
+    color: grey;
+    margin-bottom: 15px;
+}
+
+.preco{
+    font-size: 25px;
+    font-weight: bold;
+    color: #5AE24E;
+}
+
+.acoes{
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.btn{
+    border: none;
+    background: #60A5FA;
+    color: white;
+    padding: 10px 19px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.remover{
+    border: none;
+    background: red;
+    color: white;
+    padding: 10px 19px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover{
+    background: #2968c8;
+}
+
+.remover:hover{
+    background: rgb(214, 1, 1);
+}
+
+input[type="number"]{
+    width: 60px;
+    border: 2px solid #60A5FA;
+    border-radius: 7.5px;
+    padding: 7px;
+    transition: 0.3s;
+}
+
+input[type="number"]:focus{
+    transform: scale(1.01);
+    box-shadow: 2px 2px 7px 3px rgba(0, 0, 0, 0.247);
+}
+
+.resumo{
+    background: white;
+    border-radius: 12px;
+    height: 400px;
+    padding: 20px;
+    position: sticky;
+    top: 20px;
+    box-shadow: 15px 8px 15px 6px rgba(0,0,0,0.85);
+}
+
+.resumo h2{
+    margin-bottom: 20px;
+    color: #60A5FA;
+}
+
+.linha{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.total{
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    margin-top: 20px;
+}
+
+.finalizar{
+    width: 100%;
+    margin-top: 25px;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #5AE24E;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.finalizar:hover{
+    background: rgb(2, 185, 18);
+}
+
+.recomendados{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 15px;
+    height: auto;
+}
+
+.recomendados h2{
+    margin-bottom: 25px;
+    color: #333;
+    text-align: center;
+}
+
+.gridProd{
+    display: grid;
+    margin-top: 35px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+.card{
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    transition: 0.3s;
+    box-shadow: 10px 8px 26px 6px rgba(0,0,0,0.85);;
+}
+
+.card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.card h3{
+    margin: 15px 0 10px;
+    color: #333;
+}
+
+.preco_card{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.card button{
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #60A5FA;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.card button:hover{
+    background: #2968c8;
+}
+
+
+
+
+
+.prateleira
+{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 50px;
+    padding: 90px;
+    justify-content: center;
+    align-items: center;
+}
+
+.card
+{
+    background: rgb(255, 255, 255); 
+    border-radius: 5px;
+
+    height: 425px;
+    width: 250px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+    padding: 15px;
+    text-align: center;
+    overflow: hidden;
+    box-shadow: 4px 4px 7px #00000068;
+    cursor: pointer;
+
+    transition: 0.5s;
+}
+
+.card-cat:hover
+{
+    transform: scale(1.03);
+    box-shadow: 4px 4px 7px #00000068;
+}
+
+
+.card:hover
+{
+    transform: scale(1.1);
+    box-shadow: 4px 4px 7px #5AE24E68;
+}
+
+.card img {
+    width: 100%;
+    height: 230px;
+    object-fit: contain;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--cor-detalhes);
+
+}
+
+.order
+{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.nome_prt
+{
+    font-family: 'Montserrat';
+    font-size: 12px;
+    font-weight: bold;
+    color: #000;
+    margin-top: 10px;
+    /* text-wrap: nowrap; */
+}
+
+.valor
+{
+    display: flex;
+    font-family: 'Montserrat';
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-left: 15px;
+    color: var(--cor-detalhes);
+}
+
+.cambio
+{
+    margin-top: 3px;
+    font-size: 15px;
+    margin-right: 3px;
+}
+
+.add
+{
+    position: relative;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Montserrat';
+    font-size: 15px;
+    font-weight: bold;
+    background-color: var(--cor-secundaria);
+
+    transition: 0.3s;
+
+}
+
+.add:hover
+{
+    background-color: #2f80e2;   
+}
