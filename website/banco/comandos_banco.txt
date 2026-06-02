@@ -1,0 +1,83 @@
+CREATE TABLE IF NOT EXISTS administradores(
+id_administrador INT PRIMARY KEY AUTO_INCREMENT,
+nome_administrador VARCHAR(200) UNIQUE NOT NULL,
+rad VARCHAR(14) UNIQUE NOT NULL,
+email VARCHAR(500) UNIQUE NOT NULL,
+senha VARCHAR(1000) NOT NULL
+);
+
+INSERT INTO administradores (nome_administrador, rad, email, senha)
+VALUES ( ‘Enzo’, rad, [enzoRadAdm@byteware.com](mailto:enzoRadAdm@byteware.com), 123),
+( ‘Fernando’, rad, [fernandoRadAdm@byteware.com](mailto:fernandoRadAdm@byteware.com), 123),
+( ‘Gustavo’, rad, [gustavoRadAdm@byteware.com](mailto:gustavoRadAdm@byteware.com), 123),
+( ‘Ítalo’, rad, [italoRadAdm@byteware.com](mailto:italoRadAdm@byteware.com), 123)
+( ‘Lívia, rad, [liviaRadAdm@byteware.com](mailto:liviaRadAdm@byteware.com),  123);
+
+---
+
+---
+
+CREATE TABLE IF NOT EXISTS clientes(
+id_cliente INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(200) UNIQUE NOT NULL,
+cnpj VARCHAR(18) UNIQUE NOT NULL,
+email VARCHAR(500) UNIQUE NOT NULL,
+senha VARCHAR(1000) NOT NULL
+);
+
+---
+
+---
+
+CREATE TABLE IF NOT EXISTS profissionais(
+id_profissional INT PRIMARY KEY AUTO_INCREMENT,
+re VARCHAR(100) NOT NULL UNIQUE,
+nome VARCHAR(200) NOT NULL,
+cpf VARCHAR(14) NOT NULL,
+salario NUMERIC(14,2)
+);
+
+---
+
+---
+
+CREATE TABLE IF NOT EXISTS produtos(
+id_produto INT PRIMARY KEY AUTO_INCREMENT,
+nome_produto VARCHAR(200) NOT NULL,
+pn VARCHAR(255) NOT NULL UNIQUE,
+estoque INT NOT NULL,
+categoria VARCHAR(500) NOT NULL,
+preco NUMERIC(14,2) NOT NULL,
+descricao VARCHAR(1000) NOT NULL,
+ficha_tecnica
+imagem
+status BOOLEAN NOT NULL
+id_administrador INT,
+CONSTRAINT fk_administrador
+FOREIGN KEY (id_administrador)
+REFERENCES administradores(id_administrador)
+);
+
+---
+
+---
+
+CREATE TABLE IF NOT EXISTS compra (
+    id_compra INT PRIMARY KEY AUTO_INCREMENT,
+    id_cliente INT NOT NULL,
+    id_produto INT NOT NULL,
+    CONSTRAINT fk_cliente FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
+    CONSTRAINT fk_produto FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
+);
+
+---
+
+---
+
+CREATE TABLE IF NOT EXISTS alocacao(
+id_alocacao INT PRIMARY KEY
+id_cliente INT,
+id_produto INT,
+CONSTRAINT fk_cliente2 FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
+CONSTRAINT fk_produto2 FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
+);
