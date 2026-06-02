@@ -1,0 +1,359 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root
+{
+    --cor-primaria: #1E3A8A;
+    --cor-secundaria: #60A5FA;
+    --cor-detalhes: #5AE24E;
+    --cor-fundo: #f1f5fd;
+}
+
+
+/* ▼ ================================================================ NAVBAR ================================================================ ▼  */
+
+body
+{
+    background-color: var(--cor-fundo);
+}
+
+.nav
+{
+    position: fixed;
+    top: 0;
+    display: flex;
+    width: 100%;
+    height: 100px;
+    padding: 5px;
+    background-color: var(--cor-primaria);
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    z-index: 1000;
+}
+
+.line
+{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.logo
+{
+    width: 100px;
+}
+
+a
+{
+    text-decoration: none;
+    font-family: 'Montserrat';
+    color: white;
+}
+
+.nome
+{
+    font-weight: 600;
+    font-size: 40px;
+}
+
+.pesquisa
+{
+    display: flex;
+}
+
+.carrinhos
+{
+    font-size: 30px;
+    transition: 0.3s;
+}
+
+.logn
+{
+    display: flex;
+    font-size: 17px;
+    border: 2px solid white;
+    border-radius: 15px;
+}
+
+.logn a p
+{
+    font-weight: bold;
+}
+
+.cad
+{
+    display: flex;
+    width: 140px;
+    height: 30px;
+    background: #ffffff;
+    color: var(--cor-primaria);
+    border-radius: 0px 12px 12px 0px;
+    padding: 5px 15px;
+    gap: 5px;
+    transition: 0.3s;
+}
+
+.logi
+{
+    display: flex;
+    gap: 5px;
+    padding: 5px 15px;
+    transition: 0.3s;
+    border-radius: 12px 0px 0px 12px;
+    width: 115px;
+    transition: 0.3s;
+}
+
+.pesquisa
+{
+    display: flex;
+    width: 280px;
+    height: 40px;
+    padding: 5px 10px;
+    background: white;
+    border-radius: 10px;
+}
+
+.pesquisa button, input
+{
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.pesquisa button
+{
+    cursor: pointer;
+}
+
+.pesquisa input
+{
+    width: 240px;
+}
+
+.cad:hover
+{
+    background: var(--cor-secundaria);
+}
+
+.logi:hover
+{
+    color: var(--cor-primaria);
+    background: var(--cor-secundaria);
+}
+
+.carrinhos:hover
+{
+    transform: scale(1.05);
+}
+
+.user{
+    display: flex;
+    gap: 10px;
+    color: white;
+    align-items: center;
+}
+
+.foto
+{
+    width: 50px;
+}
+
+.name{
+    font-family: 'Montserrat';
+}
+
+/* ▼ ================================================================ SIDEBAR ================================================================ ▼  */
+
+
+.ancoras a.active
+{
+    color: var(--cor-detalhes);
+    padding: 33px 1px;
+    height: 85px;
+    width: 230px;
+    background-color: var(--cor-fundo);
+}
+
+.side
+{
+    position: fixed;
+    left: 0;
+    display: block;
+    height: 100vh;
+    width: 250px;
+    background-color: var(--cor-primaria);
+    padding:20px;
+    text-align: center;
+}
+
+.side img
+{
+    width: 190px;
+    margin: 0px 10px; 
+    margin-bottom: 20px;   
+}
+
+.ancoras
+{
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 50px;
+}
+
+.ancoras a
+{
+    text-align: center;
+    color: var(--cor-fundo);
+    text-decoration: none;
+    font-size: 17px;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.ancoras a i
+{
+    margin-right: 10px;
+    transition: 0.3s;
+    font-size: 17px;
+
+}
+
+.ancoras a:hover
+{
+    color: white;
+    transform: translateX(10px);
+}
+
+.ancoras a.active:hover
+{
+    color: white;
+}
+
+
+/* ▼ ================================================================ FOOTER ================================================================ ▼  */
+
+
+.rodape{
+    background-color: var(--cor-primaria);
+    color: white;
+    padding: 25px;
+    font-family: 'Montserrat';
+}
+
+.topoFooter{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.coluna{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 220px;
+}
+
+.coluna h3{
+    font-size: 14px;
+    color: #9CA3AF;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.coluna a{
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.coluna a:hover{
+    color: #60A5FA;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(3, 70px);
+    grid-gap: 20px;
+}
+
+.grid img{
+    background: white;
+    padding: 5px;
+    border-radius: 6px;
+    width: 60px;
+    height: 35px;
+    object-fit: contain;
+}
+
+.sociais{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.sociais i{
+    font-size: 18px;
+}
+
+hr{
+    height: 1px;
+    margin: 30px 0 20px;
+}
+
+.baixoFooter{
+    text-align: center;
+    color: #9CA3AF;
+    font-size: 15px;
+}
+
+.endereco{
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    line-height: 1.5;
+    font-size: 22.5px;
+}
+
+.pagamentos{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+}
+
+.pagamentos h3{
+    color: white;
+    font-size: 18.5px;
+    font-family: 'Montserrat';
+    margin-bottom: 5px;
+}
+
+.redes{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: white;
+    font-family: 'Montserrat';
+    padding: 5px;
+}
+
+
+
+.sociais p{
+    font-weight: 500;
+    font-size: 15px;
+    padding: 3px;
+}
+
+
