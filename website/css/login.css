@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    background:
+    radial-gradient(circle at bottom right, #93C5FD 5%, transparent 30%), #F1F7FD
+    radial-gradient(circle at top left, #60A5FA 0%, transparent 30%);
+}
+
+.container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.log{
+    height: 500px;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    border: 2.5px solid #60A5FA;
+    border-radius: 15px;
+    background: white;
+    padding: 40px;
+    font-family: 'Montserrat';
+    box-shadow: 8px 8px 24px -7px #60A5FA;
+    gap: 5px;
+}
+
+.rotulo{
+    margin-top: 10px;
+    font-size: 18.5px;
+    gap: 5px;
+}
+
+.log h1{
+    text-align: center;
+    font-weight: 550;
+    margin-bottom: 15px;
+    margin-right: 20px;
+}
+
+.inp{
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 17.5px;
+    border: 2.5px solid #60A5FA;
+    transition: 0.3s;
+    margin-top: 7.5px;
+}
+
+.inp:focus{
+    transform: scale(1.02);
+    outline: none;
+    box-shadow: 1px 1px 10px 1px #60A5FA;
+}
+
+
+.cdt{
+    text-decoration: none;
+    color: #60A5FA; 
+    transition: 0.3s;
+}
+
+.cdt:hover{
+    color: #5AE24E;
+}
+
+.btn{
+    width: 100%;
+    padding: 15px;
+    border-radius: 7.5px;
+    font-size: 18.5px;
+    color: white;
+    background: #60A5FA;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 20px;
+}
+
+.btn:hover{
+    transform: scale(1.03);
+}
+
+.redirecionar{
+    text-align: center;
+    margin-top: 25px;
+}

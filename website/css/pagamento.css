@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+:root {
+    --cor-primaria: #1E3A8A;
+    --cor-secundaria: #60A5FA;
+    --cor-detalhes: #5AE24E;
+    --cor-fundo: #f1f5fd;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(circle at bottom right, #93C5FD 5%, transparent 30%), #F1F7FD
+    radial-gradient(circle at top left, #60A5FA 0%, transparent 30%);
+    color: #1E3A8A;
+    font-family: Montserrat, sans-serif;
+    padding-top: 120px;
+    min-height: 100vh;
+}
+
+.formcard {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 500px;
+    width: 100%;
+    margin: 40px auto;
+    padding: 40px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(30, 58, 138, 0.15);
+    justify-content: center;
+    align-items: center;
+}
+
+h4 {
+    font-size: 16px;
+    color: var(--cor-primaria);
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+.que {
+    display: flex;
+    width: 100%;
+}
+
+.que input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #E0E7FF;
+    border-radius: 8px;
+    background-color: #F8F9FE;
+    font-family: Montserrat, sans-serif;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.que input:focus {
+    border-color: var(--cor-secundaria);
+    background-color: white;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+}
+
+.que input::placeholder {
+    color: #9CA3AF;
+}
+
+.radio-text {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: var(--cor-primaria);
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+.radio-text input[type="radio"] {
+    cursor: pointer;
+    accent-color: var(--cor-detalhes);
+    width: 18px;
+    height: 18px;
+}
+
+.radio-text:hover {
+    color: var(--cor-secundaria);
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--cor-detalhes);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #4a9c3f;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(90, 226, 78, 0.3);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.mensagem {
+    padding: 16px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    font-weight: 500;
+    width: 100%;
+    box-sizing: border-box;
+    animation: slideIn 0.3s ease;
+}
+
+.mensagem.sucesso {
+    background-color: #10B981;
+    border-left: 4px solid #059669;
+}
+
+.mensagem.erro {
+    background-color: #EF4444;
+    border-left: 4px solid #DC2626;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+input[type="email"] {
+    width: 100%;
+}
+
+input[type="text"] {
+    width: 100%;
+}
