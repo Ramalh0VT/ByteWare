@@ -1,0 +1,64 @@
+:root {
+    --cor-primaria: #1E3A8A;
+    --cor-fundo: #f1f5fd;
+    --cor-detalhes: #5AE24E;
+}
+
+.side .ancoras a.active {
+
+    color: var(--cor-fundo);
+    background: transparent;
+    padding: 0;
+    height: auto;
+    width: auto;
+}
+
+.side {
+    position: fixed;
+    left: 0;
+    display: block;
+    height: 100vh;
+    width: 250px;
+    background-color: var(--cor-primaria);
+    padding:20px;
+    text-align: center;
+}
+
+.side img {
+    width: 190px;
+    margin: 0px 10px; 
+    margin-bottom: 20px;   
+}
+
+.side .ancoras {
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 50px;
+}
+
+.side .ancoras a {
+    text-align: center;
+    color: var(--cor-fundo);
+    text-decoration: none;
+    font-size: 17px;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.side .ancoras a i {
+    margin-right: 10px;
+    transition: 0.3s;
+    font-size: 17px;
+
+}
+
+.side .ancoras a:hover {
+    color: white;
+    transform: translateX(10px);
+}
+
+.side .ancoras a.active:hover {
+    color: white;
+}

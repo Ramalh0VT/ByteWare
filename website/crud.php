@@ -24,17 +24,23 @@ try {
     // Função para ler registros
     function readAll($pdo, $table, $where = null, $like = null, $between1 = null, $between2 = null, $limit = null) {
         $sql = "SELECT * FROM $table";
-        if($where){
-            $sql .= " WHERE $where";
+        $conditions = [];
+
+        if ($where) {
+            $conditions[] = $where;
         }
 
-	    if($like){
-		$sql .= "WHERE nome_produto LIKE $like";
-	    }
-	    
-        if($between1 && $between2){
-		$sql .= "WHERE preco BETWEEN $between1 AND $between2";
-	    }
+        if ($like) {
+            $conditions[] = "nome_produto LIKE $like";
+        }
+
+        if ($between1 && $between2) {
+            $conditions[] = "preco BETWEEN $between1 AND $between2";
+        }
+
+        if (!empty($conditions)) {
+            $sql .= " WHERE " . implode(' AND ', $conditions);
+        }
 
         if ($limit) {
             $sql .= " LIMIT ". (int)$limit;

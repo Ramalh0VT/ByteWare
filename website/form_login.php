@@ -13,7 +13,7 @@ $login_invalido = $_GET['erro'] ?? null;
 <body>
 
     <div class="container">
-        <form action="init.php" method="post" class="log">
+        <form action="process/init.php" method="post" class="log">
 
             <h1><i class="bi bi-person"></i>LOGIN</h1>
 
@@ -28,15 +28,16 @@ $login_invalido = $_GET['erro'] ?? null;
                 <i class="bi bi-lock"></i>
                 <label for="senha">Senha</label>
             </div>
-            <input type="text" placeholder="Insira a sua senha" id="senha" name="senha-login" maxlength="1000" class="inp">
+            <input type="password" placeholder="Insira a sua senha" id="senha" name="senha-login" maxlength="1000" class="inp" autocomplete="current-password">
 
             <button type="submit" class="btn">Login</button>
             <?php
-            if($login_invalido == 'erro_login'){
+            if ($login_invalido === 'erro_login') {
                 echo '<h3>E-mail ou senha inválidos</h3>';
+            } elseif ($login_invalido === 'restrito') {
+                echo '<h3>Acesso restrito. Faça login primeiro.</h3>';
             }
-            elseif($login_invalido =='restrito');
-            ?>
+            ?> 
             <div class="redirecionar">
                 <p>Ainda não se cadastrou? <a href="form_cadastro.php" class="cdt">Acesse aqui</a></p>
             </div>

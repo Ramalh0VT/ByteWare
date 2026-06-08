@@ -1,4 +1,4 @@
-select * FROM administradores;
+# Arquivo temporário de comandos de banco de dados arquivado.  # Este arquivo permanece somente como referência histórica.
 select * from produtos;
 
 
@@ -25,7 +25,7 @@ nome VARCHAR(200) UNIQUE NOT NULL,
 cnpj VARCHAR(18) UNIQUE NOT NULL,
 email VARCHAR(500) UNIQUE NOT NULL,
 senha VARCHAR(1000) NOT NULL
-);
+);          
 
 
 

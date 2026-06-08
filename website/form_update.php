@@ -22,45 +22,23 @@ if(isset($_GET['erro'])){
 
 if(isset($_GET['atualizado'])){
     $msg = '<h1 class="msg">Produto atualizado com sucesso!</h1>';
-    header("Location: estoque.php");
 }
 
 if(isset($_GET['id'])){
     $id = $_GET['id'];
 } else {
     header('Location: estoque.php?erro=errolink_invalido');
-    die();
+    exit;
 }
 
 $produto = read($pdo, 'produtos', "id_produto=$id");
+if (!$produto) {
+    header('Location: estoque.php?erro=erro_linkinvalido');
+    exit;
+}
 
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
-    if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] !== UPLOAD_ERR_NO_FILE) {
-        $tipos_permitidos = ['image/jpeg', 'image/png', 'image/jpg'];
-        $tamanho_max = 10 * 1024 * 1024; 
-
-        if (in_array($_FILES['imagem']['type'], $tipos_permitidos) && $_FILES['imagem']['size'] <= $tamanho_max){
-            $pn_tratado = trim($produto['pn'], '-');
-            $extensao = pathinfo($_FILES['imagem']['name'], PATHINFO_EXTENSION);
-            $nome_img = 'produto_'.$pn_tratado.'.'.$extensao;
-            $dir = './';
-            $caminho = $dir.'imagens_produtos/';
-            $arquivo = $caminho.$nome_img;
-            
-            if(move_uploaded_file($_FILES['imagem']['tmp_name'], $arquivo)){
-                update($pdo, 'produtos', ['imagem' => $arquivo], 'id_produto='.$produto['id_produto']);
-            } else {
-                header('Location: form_update.php?id='.$id.'&erro=3');
-                die();
-            }
-        } else {
-            header('Location: form_update.php?id='.$id.'&erro=4');
-            die(); 
-        }
-    }
-
-   
     $dados = [
         'nome_produto' => htmlspecialchars(trim($_POST['nome'])),
         'pn'           => htmlspecialchars(trim($_POST['pn'])),
@@ -69,10 +47,56 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         'categoria'    => htmlspecialchars(trim($_POST['categoria'])),
         'descricao'    => htmlspecialchars(trim($_POST['descricao'])),
     ];
-    
+
+    // Se veio uma imagem, valide e mova antes do update único
+    if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] !== UPLOAD_ERR_NO_FILE) {
+        $tipos_permitidos = ['image/jpeg', 'image/png', 'image/jpg'];
+        $tamanho_max = 10 * 1024 * 1024;
+
+        if (in_array($_FILES['imagem']['type'], $tipos_permitidos) && $_FILES['imagem']['size'] <= $tamanho_max) {
+            $pn_tratado = preg_replace('/[^A-Za-z0-9_-]/', '', $dados['pn'] ? $dados['pn'] : $produto['pn']);
+            $extensao = strtolower(pathinfo($_FILES['imagem']['name'], PATHINFO_EXTENSION));
+            if (!in_array($extensao, ['jpg', 'jpeg', 'png'])) {
+                header('Location: form_update.php?id='.$id.'&erro=4');
+                exit;
+            }
+            $nome_img = 'produto_'.$pn_tratado.'_'.time().'.'.$extensao;
+
+            $dir_server = __DIR__."/imagens_produtos/";
+            if (!is_dir($dir_server)) mkdir($dir_server, 0755, true);
+            $arquivo_server = $dir_server.$nome_img;
+            $arquivo_db = './imagens_produtos/'.$nome_img;
+
+            if (!move_uploaded_file($_FILES['imagem']['tmp_name'], $arquivo_server)) {
+                header('Location: form_update.php?id='.$id.'&erro=3');
+                exit;
+            }
+
+            // anexe o caminho da nova imagem aos dados a atualizar
+            $dados['imagem'] = $arquivo_db;
+        } else {
+            header('Location: form_update.php?id='.$id.'&erro=4');
+            exit;
+        }
+    }
+
+    // Atualiza todos os campos (incluindo imagem se houve upload)
     update($pdo, 'produtos', $dados, 'id_produto='.$id);
+
+    // Se houve upload, remova a imagem antiga para não acumular arquivos
+    if (isset($dados['imagem'])) {
+        $old_path = $produto['imagem'];
+        if ($old_path && $old_path !== $dados['imagem']) {
+            $old_server = realpath(__DIR__ . '/' . ltrim($old_path, './'));
+            $imagens_dir = realpath(__DIR__ . '/imagens_produtos/');
+            if ($old_server && $imagens_dir && strpos($old_server, $imagens_dir) === 0 && file_exists($old_server)) {
+                @unlink($old_server);
+            }
+        }
+    }
+
     header('Location: form_update.php?id='.$id.'&atualizado=1');
-    die();
+    exit;
 }
 ?>
 

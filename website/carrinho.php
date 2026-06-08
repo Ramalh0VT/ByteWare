@@ -18,7 +18,7 @@ if($idParaAdicionar){
             $_SESSION['produtos'][$id]['quantidade']++;
         }
     } else {
-        $produto = read($pdo, 'produtos', "id_produto = '$id'");
+        $produto = read($pdo, 'produtos', 'id_produto = '.$id);
         if($produto){
             $produto['quantidade'] = 1;
             $_SESSION['produtos'][$id] = $produto;
@@ -105,7 +105,6 @@ if(isset($_GET['remover']) && isset($_GET['id_remover'])){
                 ?>
             </div>
             <div class="resumo">
-                <form action="pagamento.php" method="post">
                     <h2>Resumo da Compra</h2>
                     <div class="linha">
                         <span>Itens no carrinho</span>
@@ -123,9 +122,12 @@ if(isset($_GET['remover']) && isset($_GET['id_remover'])){
                         Total: R$ <?php echo number_format($subtotal ?? 0, 2, ',', '.'); ?></div>
                     <div class="resumo-acoes">
                         <a href="index.php" class="continuar">Continuar comprando</a>
-                        <button class="finalizar" <?php echo empty($_SESSION['produtos']) ? 'disabled' : ''; ?>><a href="pagamento.php?erro=nenhum">Ir para pagamento</a></button>
+                        <?php if (empty($_SESSION['produtos'])): ?>
+                            <button type="button" class="finalizar" disabled>Ir para pagamento</button>
+                        <?php else: ?>
+                            <a href="pagamento.php" class="finalizar">Ir para pagamento</a>
+                        <?php endif; ?>
                     </div>
-                </form>
             </div>
         </div>
 

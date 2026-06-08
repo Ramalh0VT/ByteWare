@@ -51,12 +51,12 @@ $filtroValue = htmlspecialchars($_GET['filtro'] ?? '');
                     </div>
                 <?php else: ?>
                     <div class="user">
-                        <div class="perfil">
+                        <a href="profile.php" class="perfil">
                             <img src="./imagens/usernulo.png" alt="Perfil" class="foto">
                             <h3 class="name"><?php echo htmlspecialchars($username); ?></h3>
-                        </div>
+                        </a>
                         <div class="sair">
-                            <a href="logout.php?logout=logout" title="Sair"><i class="bi bi-box-arrow-left"></i></a>
+                            <a href="process/logout.php?logout=logout" title="Sair"><i class="bi bi-box-arrow-left"></i></a>
                         </div>
                     </div>
                 <?php endif; ?>

@@ -59,62 +59,70 @@
 <body>
     <main>
         <div class="container">
-            <div class="card-box produtos-box">
-                
-                <div class="quantidade">
-                    <i class="bi bi-boxes"></i>
-                    <h4 class="number"><?php print number_format($estoque_total, 0, ',', '.');?></h4>
+            <a href="#produtos-geral" class="card-link">
+                <div class="card-box produtos-box">
+                    <div class="quantidade">
+                        <i class="bi bi-boxes"></i>
+                        <h4 class="number"><?php print number_format($estoque_total, 0, ',', '.');?></h4>
+                    </div>
+                    <div class="ali">
+                        <h4>Total</h4>
+                    </div>
                 </div>
-                <div class="ali">
-                    <h4>Total</h4>
-                </div>
-            </div>
+            </a>
 
-            <div class="card-box produtosbaixos-box">
-                
-                <div class="quantidade">
-                    <i class="bi bi-exclamation-circle"></i>
-                    <h4 class="number"><?php print $estoque_baixoTotal;?></h4>
+            <a href="#produtos-geral" class="card-link">
+                <div class="card-box produtosbaixos-box">
+                    <div class="quantidade">
+                        <i class="bi bi-exclamation-circle"></i>
+                        <h4 class="number"><?php print $estoque_baixoTotal;?></h4>
+                    </div>
+                    <div class="ali">
+                        <h4>Perto do mínimo</h4>
+                    </div>
                 </div>
-                <div class="ali">
-                    <h4>Perto do mínimo</h4>
-                </div>
-            </div>
+            </a>
 
-            <div class="card-box produtosabaixo-box">
-                <div class="quantidade">
-                    <i class="bi bi-exclamation-triangle"></i>
-                    <h4 class="number"><?php print $estoque_minTotal;?></h4>
+            <a href="#produtos-geral" class="card-link">
+                <div class="card-box produtosabaixo-box">
+                    <div class="quantidade">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        <h4 class="number"><?php print $estoque_minTotal;?></h4>
+                    </div>
+                    <div class="ali">
+                        <h4>Abaixo do Mínimo</h4>
+                    </div>
                 </div>
-                <div class="ali">
-                    <h4>Abaixo do Mínimo</h4>
-                </div>
-            </div>
+            </a>
 
-            <div class="card-box valor-box">
-                <div class="quantidade">
-                    <i class="bi bi-currency-dollar"></i>
-                    <h4 class="number">R$<?php print number_format($valor_total, 2, ',', '.');?></h4>
+            <a href="#produtos-geral" class="card-link">
+                <div class="card-box valor-box">
+                    <div class="quantidade">
+                        <i class="bi bi-currency-dollar"></i>
+                        <h4 class="number">R$<?php print number_format($valor_total, 2, ',', '.');?></h4>
+                    </div>
+                    <div class="ali">
+                        <h4>Valor total</h4>
+                    </div>
                 </div>
-                <div class="ali">
-                    <h4>Valor total</h4>
-                </div>
-            </div>
+            </a>
 
-            <div class="card-box produtos-inativos">
-                <div class="quantidade">
-                    <i class="bi bi-ban"></i>
-                    <h4 class="number"><?php print $estoque_zero;?></h4>
+            <a href="#produtos-sem-estoque" class="card-link">
+                <div class="card-box produtos-inativos">
+                    <div class="quantidade">
+                        <i class="bi bi-ban"></i>
+                        <h4 class="number"><?php print $estoque_zero;?></h4>
+                    </div>
+                    <div class="ali">
+                        <h4>Inativos</h4>
+                    </div>
                 </div>
-                <div class="ali">
-                    <h4>Inativos</h4>
-                </div>
-            </div>
+            </a>
         </div>
 
 
 
-        <h1>Produtos geral</h1>
+        <h1 id="produtos-geral">Produtos geral</h1>
         <section class="box-tabela">
             <table class="teste">
                 <thead>
@@ -145,7 +153,6 @@
                             }
                             elseif ($produto['estoque'] <= 250 && $produto['estoque'] > 100){
                                 $status = 'estoque_baixo';
-                                $estoque_baixoTotal = $estoque_baixoTotal + 1;
                             }
                             elseif ($produto['estoque'] <= 100 && $produto['estoque'] > 0){
                                 $status = 'estoque_mtbaixo';
@@ -191,7 +198,7 @@
         </section>
 
 
-        <h1>Produtos sem estoque</h1>
+        <h1 id="produtos-sem-estoque">Produtos sem estoque</h1>
         <section class="box-tabela">
             <table>
                 <thead>

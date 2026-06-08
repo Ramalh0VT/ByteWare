@@ -30,15 +30,32 @@
     ?>
     <body>
         <main>
-            <div class="box">
-                <h1 class="margem_baixo"><?= $produto['nome_produto'] ?></h1>
+            <section class="box">
+                <div class="header-info">
+                    <div>
+                        <h1 class="produto-titulo"><?= htmlspecialchars($produto['nome_produto']) ?></h1>
+                        <p class="subtitulo">Conheça mais sobre este produto e veja todos os detalhes antes de continuar.</p>
+                    </div>
+                    <span class="etiqueta">Categoria: <?= htmlspecialchars($produto['categoria']) ?></span>
+                </div>
+
                 <div class="info">
-                    <img src="<?= $produto['imagem'] ?>" alt="Imagem do Produto">
+                    <figure class="image-wrapper">
+                        <img src="<?= htmlspecialchars($produto['imagem']) ?>" alt="Imagem de <?= htmlspecialchars($produto['nome_produto']) ?>">
+                    </figure>
+
                     <div class="desc">
-                        <p><?= $desc ?></p>
-                        <div class="abaixo">
-                            <p>R$ <?= number_format($produto['preco'], 2, ',', '.') ?></p>
-                            <p>Tipo: <?= $produto['categoria'] ?></p>
+                        <div class="descricao-card">
+                            <h2>Descrição</h2>
+                            <p><?= htmlspecialchars($desc) ?></p>
+                        </div>
+
+                        <div class="detalhes">
+                            <div class="preco">R$ <?= number_format($produto['preco'], 2, ',', '.') ?></div>
+                            <div class="info-meta">
+                                <span><strong>ID:</strong> <?= htmlspecialchars($produto['id_produto']) ?></span>
+                                <span><strong>Tipo:</strong> <?= htmlspecialchars($produto['categoria']) ?></span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -49,7 +66,7 @@
                         <a href="estoque.php" class="voltar">Voltar ao estoque</a>
                     </form>
                 </div>
-            </div>
+            </section>
         </main>
     </body>
     </html>

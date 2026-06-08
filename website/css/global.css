@@ -165,12 +165,21 @@ a
 {
     display: flex;
     gap: 10px;
-    align-items: ceter;
+    align-items: center;
+}
+
+.perfil h3{
+    font-size: 15px;
 }
 
 .sair
 {
     font-size: 30px;
+    transition: 0.3s;
+}
+
+.sair:hover{
+    transform: scale(1.1);
 }
 
 .foto

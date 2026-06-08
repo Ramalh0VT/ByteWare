@@ -34,7 +34,7 @@
 ?>
     <main>
 
-        <form action="insertProdutos.php" method="POST" class="formulario" enctype="multipart/form-data">
+        <form action="process/insertProdutos.php" method="POST" class="formulario" enctype="multipart/form-data">
             <h1 class="degrade">Cadastro de Produto</h1>
             <input type="text" id="produto" name="nome" maxlength="200" class="inp" placeholder="Nome do Produto" required>
 

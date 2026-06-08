@@ -14,7 +14,7 @@ $erro = $_GET['erro'] ?? null;
 <main>
     
         <div class="container">
-            <form action="insertUsuario.php" method="post" class="form-cadastro">
+            <form action="process/insertUsuario.php" method="post" class="form-cadastro">
     
                 <h1>Cadastre-se</h1>
                 <p class="subtitulo">Crie sua conta gratuitamente</p>
