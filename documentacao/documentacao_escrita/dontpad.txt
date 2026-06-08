@@ -1,0 +1,487 @@
+https://prod.liveshare.vsengsaas.visualstudio.com/join?559FE1382DDFB2FDDDB53C7FA67BBBF80D7D
+
+
+
+
+select current_user;
+
+CREATE TABLE IF NOT EXISTS administradores(
+id_administrador INT PRIMARY KEY AUTO_INCREMENT,
+nome_administrador VARCHAR(200) UNIQUE NOT NULL,
+rad VARCHAR(14) UNIQUE NOT NULL,
+email VARCHAR(500) UNIQUE NOT NULL,
+senha VARCHAR(1000) NOT NULL
+);
+
+INSERT INTO administradores (nome_administrador, rad, email, senha)
+
+VALUES ( ‘Enzo’, rad, enzoRadAdm@byteware.com, 123),
+
+( ‘Fernando’, rad, fernandoRadAdm@byteware.com, 123),
+
+( ‘Gustavo’, rad, gustavoRadAdm@byteware.com, 123),
+
+( ‘Ítalo’, rad, italoRadAdm@byteware.com, 123),
+
+( ‘Lívia, rad, liviaRadAdm@byteware.com,  123);
+
+---
+
+---
+
+---
+
+CREATE TABLE IF NOT EXISTS clientes(
+id_cliente INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(200) UNIQUE NOT NULL,
+cnpj VARCHAR(18) UNIQUE NOT NULL,
+email VARCHAR(500) UNIQUE NOT NULL,
+senha VARCHAR(1000) NOT NULL
+);
+
+---
+
+---
+
+---
+
+CREATE TABLE IF NOT EXISTS profissionais(
+id_profissional INT PRIMARY KEY AUTO_INCREMENT,
+re VARCHAR(100) NOT NULL UNIQUE,
+nome VARCHAR(200) NOT NULL,
+cpf VARCHAR(14) NOT NULL,
+salario NUMERIC(14,2)
+);
+
+---
+
+---
+
+---
+
+CREATE TABLE IF NOT EXISTS produtos(
+id_produto INT PRIMARY KEY AUTO_INCREMENT,
+nome_produto VARCHAR(200) NOT NULL,
+
+pn VARCHAR(255) NOT NULL UNIQUE,
+estoque INT NOT NULL,
+categoria VARCHAR(500) NOT NULL,
+preco NUMERIC(14,2) NOT NULL,
+descricao VARCHAR(1000) NOT NULL,
+status BOOLEAN NOT NULL
+
+id_administrador INT,
+CONSTRAINT fk_administrador
+FOREIGN KEY (id_administrador)
+REFERENCES administradores(id_administrador),
+);
+
+CREATE TABLE IF NOT EXISTS compra (
+id_cliente INT,
+id_produto INT,
+
+CONSTRAINT fk_cliente
+FOREIGN KEY (id_cliente)
+REFERENCES clientes(id_cliente),
+
+CONSTRAINT fk_produto
+FOREIGN KEY (id_produto)
+REFERENCES produtos(id_produto)
+);
+
+CREATE TABLE IF NOT EXISTS alocacao(
+id_cliente INT,
+id_produto INT,
+
+CONSTRAINT fk_cliente2
+FOREIGN KEY (id_cliente)
+REFERENCES clientes(id_cliente),
+
+CONSTRAINT fk_produto2
+FOREIGN KEY (id_produto)
+REFERENCES produtos(id_produto)
+);
+
+CREATE TABLE IF NOT EXISTS administradores(
+id_administrador INT PRIMARY KEY AUTO_INCREMENT,
+nome_administrador VARCHAR(200) UNIQUE NOT NULL,
+rad VARCHAR(14) UNIQUE NOT NULL,
+email VARCHAR(500) UNIQUE NOT NULL,
+senha VARCHAR(1000) NOT NULL
+);
+
+INSERT INTO administradores (nome_administrador, rad, email, senha)
+VALUES ( ‘Enzo’, rad, [enzoRadAdm@byteware.com](mailto:enzoRadAdm@byteware.com), 123),
+( ‘Fernando’, rad, [fernandoRadAdm@byteware.com](mailto:fernandoRadAdm@byteware.com), 123),
+( ‘Gustavo’, rad, [gustavoRadAdm@byteware.com](mailto:gustavoRadAdm@byteware.com), 123),
+( ‘Ítalo’, rad, [italoRadAdm@byteware.com](mailto:italoRadAdm@byteware.com), 123)
+( ‘Lívia, rad, [liviaRadAdm@byteware.com](mailto:liviaRadAdm@byteware.com),  123);
+
+---
+
+---
+
+CREATE TABLE IF NOT EXISTS clientes(
+id_cliente INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(200) UNIQUE NOT NULL,
+cnpj VARCHAR(18) UNIQUE NOT NULL,
+email VARCHAR(500) UNIQUE NOT NULL,
+senha VARCHAR(1000) NOT NULL
+);
+
+---
+
+---
+
+CREATE TABLE IF NOT EXISTS profissionais(
+id_profissional INT PRIMARY KEY AUTO_INCREMENT,
+re VARCHAR(100) NOT NULL UNIQUE,
+nome VARCHAR(200) NOT NULL,
+cpf VARCHAR(14) NOT NULL,
+salario NUMERIC(14,2)
+);
+
+---
+
+---
+
+CREATE TABLE IF NOT EXISTS produtos(
+id_produto INT PRIMARY KEY AUTO_INCREMENT,
+nome_produto VARCHAR(200) NOT NULL,
+pn VARCHAR(255) NOT NULL UNIQUE,
+estoque INT NOT NULL,
+categoria VARCHAR(500) NOT NULL,
+preco NUMERIC(14,2) NOT NULL,
+descricao VARCHAR(1000) NOT NULL,
+ficha_tecnica
+imagem
+status BOOLEAN NOT NULL
+id_administrador INT,
+CONSTRAINT fk_administrador
+FOREIGN KEY (id_administrador)
+REFERENCES administradores(id_administrador)
+);
+
+
+============================================= italo mexeu =========================================
+
+CREATE TABLE IF NOT EXISTS produtos(
+id_produto INT PRIMARY KEY AUTO_INCREMENT,
+nome_produto VARCHAR(200) NOT NULL,
+id_administrador INT,
+CONSTRAINT fk_administrador
+FOREIGN KEY (id_administrador)
+REFERENCES administradores(id_administrador),
+pn VARCHAR(255) NOT NULL,
+estoque INT NOT NULL,
+categoria VARCHAR(500) NOT NULL,
+custo NUMERIC(14,2) NOT NULL,
+descricao VARCHAR(1000) NOT NULL,
+ativo BOOLEAN NOT NULL,
+imagem VARCHAR(1000) NOT NULL
+);
+
+============================================= italo mexeu =========================================
+---
+
+---
+
+CREATE TABLE IF NOT EXISTS compra (
+id_compra INT PRIMARY KEY,
+id_cliente INT,
+id_produto INT,
+CONSTRAINT fk_cliente FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
+CONSTRAINT fk_produto FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
+);
+
+---
+
+---
+
+CREATE TABLE IF NOT EXISTS alocacao(
+id_alocacao INT PRIMARY KEY
+id_cliente INT,
+id_produto INT,
+CONSTRAINT fk_cliente2 FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
+CONSTRAINT fk_produto2 FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
+);
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS administradores(
+id_administrador INT PRIMARY KEY AUTO_INCREMENT,
+nome_administrador VARCHAR(200) UNIQUE NOT NULL,
+rad VARCHAR(14) UNIQUE NOT NULL,
+email VARCHAR(500) UNIQUE NOT NULL,
+senha VARCHAR(1000) NOT NULL
+);
+
+INSERT INTO administradores (nome_administrador, rad, email, senha)
+VALUES ( ‘Enzo’, rad, enzoRadAdm@byteware.com, 123),
+( ‘Fernando’, rad, fernandoRadAdm@byteware.com, 123),
+( ‘Gustavo’, rad, gustavoRadAdm@byteware.com, 123),
+( ‘Ítalo’, rad, italoRadAdm@byteware.com, 123)
+( ‘Lívia, rad, liviaRadAdm@byteware.com,  123);
+
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS clientes(
+id_cliente INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(200) UNIQUE NOT NULL,
+cnpj VARCHAR(18) UNIQUE NOT NULL,
+email VARCHAR(500) UNIQUE NOT NULL,
+senha VARCHAR(1000) NOT NULL
+);
+
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS profissionais(
+id_profissional INT PRIMARY KEY AUTO_INCREMENT,
+re VARCHAR(100) NOT NULL UNIQUE,
+nome VARCHAR(200) NOT NULL,
+cpf VARCHAR(14) NOT NULL,
+salario NUMERIC(14,2)
+);
+
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS produtos(
+id_produto INT PRIMARY KEY AUTO_INCREMENT,
+nome_produto VARCHAR(200) NOT NULL,
+pn VARCHAR(255) NOT NULL UNIQUE,
+estoque INT NOT NULL,
+categoria VARCHAR(500) NOT NULL,
+preco NUMERIC(14,2) NOT NULL,
+descricao VARCHAR(1000) NOT NULL,
+ficha_tecnica 
+imagem
+status BOOLEAN NOT NULL
+id_administrador INT,
+CONSTRAINT fk_administrador
+FOREIGN KEY (id_administrador)
+REFERENCES administradores(id_administrador)
+);
+
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS compra (
+id_compra INT PRIMARY KEY,
+id_cliente INT,
+id_produto INT,
+CONSTRAINT fk_cliente FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
+CONSTRAINT fk_produto FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
+);
+
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS alocacao(
+id_alocacao INT PRIMARY KEY
+id_cliente INT,
+id_produto INT,
+CONSTRAINT fk_cliente2 FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente), 
+CONSTRAINT fk_produto2 FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Automação e Sensores Industriais
+
+Banco de Dados:
+
+Produtos:
+
+- ID
+- Nome
+- Preço
+- Quantidade
+- Peso
+- Fabricante/Marca
+- Código do Fabricante/Part Number (PN) - Código que vai diferenciar a máquina, se mudar uma letra deste código pode mudar o tensão, tamanho, essas coisas
+- Código EAN/GTIN - Código para rastreio
+- Categoria/Subcategoria
+
+Clientes:
+
+- ID
+- Nome
+- E-mail
+- Senha
+- CPF/ CNPJ
+
+Adms:
+
+- ID
+- Nome
+- E-mail
+- Senha
+- CPF
+- ID único - Apenas o próprio admin vai ter acesso
+
+
+Página do Admin
+
+1.Formulário para login:
+
+- Nome:
+- Senha:
+- Código único para cada admin:
+
+1.1. Formulário para cadastro de produto:
+
+Acho bom ter uma parte de confirmação para o adm colocar o ID único que e vai ser atualizado lá no log
+
+1.2. Formulário para editar produtos:
+
+Decidir se vai fazer o site no modo hardcode ou no modo mais profissional
+
+Nesse formulário acho bom ter uma parte de explicar o que foi e por que foi feita a mudança
+
+Depois de enviar o formulário encaminhar a pessoa direto para onde a mudança foi feita
+
+Ao mudar, essa mudança vai ser enviada para uma página de log que vai mostrar o nome, horário, o que foi a mudança e o por que dela.
+
+Complementar: Pode ter uma parte que vai servir só para ver as mudanças, não sei fazer isso de forma realmente profissional
+
+1.3. Filtros para facilitar a navegação:
+
+Usar para os filtros:
+
+- Categorias (Sensores)
+- Subcategoria (Sensores de proximidade)
+- Outros
+
+ 
+
+1..4. Gestão dos produtos
+
+Se o produto zerar o estoque ter uma opção de pausa para não mostrar mais no site mas não excluir no banco
+
+Pode ser uma tabela com um filtro e talvez até um negócio de pesquisar para achar o produto mais fácil
+
+1.5. Decidir se vai ser um dashboard ou se vai ser apenas um header e footer básico
+
+Acho melhor ser um dash
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://br.mouser.com/c/sensors/?orgKeyword=Sensor
+
+
+
+
+
+
+
+Enzo Saroa     100051-41     enzo10005141Adm@byteware.com   123
+
+Fernando Lopes    100065-18    fernando10006518Adm@byteware.com   123
+
+Gustavo Ramalho   100072-15   gustavo10007215Adm@byteware.com   123
+
+Ítalo Salas   100092-03   italo10009203Adm@byteware.com   123
+
+Lívia Pagiato   100012-94   livia10001294Adm@byteware.com   123
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2322																		
