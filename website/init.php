@@ -3,8 +3,6 @@ require_once 'crud.php';
 session_start();
 ?>
 
-
-
 <?php
 // Se o session clientes ainda estiver vazio e o post email-login também, significa que a pessoa não clicou no botão de login no form e ainda não foi criado o session
 if (!isset($_SESSION['clienteLogado']) && !isset($_SESSION['admLogado']) && !isset($_POST['email-login'])) {

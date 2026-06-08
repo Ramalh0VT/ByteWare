@@ -1,5 +1,5 @@
 <?php
-
+require_once 'init.php';
 $clientes = readAll($pdo, 'clientes');
 $administradores = readAll($pdo, 'administradores');
 
@@ -13,7 +13,7 @@ session_unset();
 
 // Aqui vai ser a verificação se é adm ou não
 foreach($administradores as $mostrarAdm){
-        if($mostrarAdm['email'] == $verificarUsuario['email'] && $mostrarAdm['senha'] == $verificarUsuario['senha']){
+        if($mostrarAdm['email'] === $verificarUsuario['email'] && $mostrarAdm['senha'] === $verificarUsuario['senha']){
             $_SESSION['admLogado'] = [];
             $_SESSION['admLogado'] = $mostrarAdm;
             header('Location: estoque.php');

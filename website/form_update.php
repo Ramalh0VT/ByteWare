@@ -1,7 +1,7 @@
 <?php
 require_once 'crud.php';
 $titulo = 'Editar de produtos';
-$css = './css/cadastroPro.css';
+$css = './css/form_update.css';
 require_once './partials/sidebar.php';
 
 $id = null;
@@ -22,6 +22,7 @@ if(isset($_GET['erro'])){
 
 if(isset($_GET['atualizado'])){
     $msg = '<h1 class="msg">Produto atualizado com sucesso!</h1>';
+    header("Location: estoque.php");
 }
 
 if(isset($_GET['id'])){
@@ -78,11 +79,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 <body>
     <?php if(isset($msg)) { echo $msg; } ?>
     
+   
     <div class="centralizar">
         <form action="./form_update.php?id=<?=$id?>" method="post" class="form-cadastro" enctype="multipart/form-data">
             <h1 class="titulo-centralizado">Edição</h1>
 
-            <label class="label_form">Nome</label>
+            <label class="label_form">Nome:</label>
             <input type="text" maxlength="200" value="<?php echo $produto['nome_produto'];?>" name="nome" >
 
             <label class="label_form">PN:</label>
@@ -119,5 +121,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             <a href="estoque.php" style="margin-top: 10px; display: block; text-align: center;">Voltar ao estoque</a>
         </form>
     </div>
+
 </body>
 </html>

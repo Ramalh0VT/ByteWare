@@ -22,18 +22,24 @@ try {
     }
 
     // Função para ler registros
-    function readAll($pdo, $table, $where = null, $like = null, $between1 = null, $between2 = null) {
+    function readAll($pdo, $table, $where = null, $like = null, $between1 = null, $between2 = null, $limit = null) {
         $sql = "SELECT * FROM $table";
         if($where){
             $sql .= " WHERE $where";
         }
-	if($like){
+
+	    if($like){
 		$sql .= "WHERE nome_produto LIKE $like";
-	}
-	if($between1 && $between2){
+	    }
+	    
+        if($between1 && $between2){
 		$sql .= "WHERE preco BETWEEN $between1 AND $between2";
-	}
-		
+	    }
+
+        if ($limit) {
+            $sql .= " LIMIT ". (int)$limit;
+        }
+
         $stmt = $pdo->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

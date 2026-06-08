@@ -92,7 +92,25 @@ h4 {
     color: var(--cor-secundaria);
 }
 
-button {
+.pcl{
+    padding: 5px;
+    border: 2px solid #E0E7FF;
+    background-color: #F8F9FE;
+    border-radius: 8px;
+    outline: none;
+    font-family: Montserrat, sans-serif;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.pcl:focus{
+    border-color: var(--cor-secundaria);
+    background-color: white;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+}
+
+.pagode {
     width: 100%;
     padding: 14px;
     background-color: var(--cor-detalhes);
@@ -104,16 +122,16 @@ button {
     font-size: 16px;
     cursor: pointer;
     transition: 0.3s;
-    margin-top: 10px;
+    margin-top: 30px;
 }
 
-button:hover {
+.pagode:hover {
     background-color: #4a9c3f;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(90, 226, 78, 0.3);
 }
 
-button:active {
+.pagode:active {
     transform: translateY(0);
 }
 

@@ -24,7 +24,7 @@ main{
 .carrinho{
     display: grid;
     height: auto;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 1.9fr 1fr;
     gap: 50px;
     margin-top: 40px;
     padding: 60px;
@@ -33,7 +33,17 @@ main{
 .produtos{
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 15px;
+    
+    width: min(1225px, 100%);
+    border-radius: 24px;
+    overflow: hidden;
+
+
+    max-height: 800px;
+
+    overflow-y: auto;
+    margin-bottom: 100px;
 }
 
 .produto{
@@ -42,7 +52,6 @@ main{
     padding: 20px;
     display: flex;
     gap: 20px;
-    box-shadow: 10px 8px 26px 6px rgba(0,0,0,0.85);
 }
 
 .produto img{
@@ -115,12 +124,33 @@ input[type="number"]:focus{
     box-shadow: 2px 2px 7px 3px rgba(0, 0, 0, 0.247);
 }
 
+.quantidade-form{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.item-total{
+    margin-top: 14px;
+    color: #1d4ed8;
+    font-weight: 700;
+}
+
+.vazio{
+    padding: 40px;
+    border-radius: 18px;
+    background: white;
+    text-align: center;
+    color: #1f2937;
+    box-shadow: 0 15px 40px rgba(15, 23, 42, 0.08);
+    font-size: 1.05rem;
+}
+
 .resumo{
     background: white;
     border-radius: 12px;
     height: 400px;
     padding: 20px;
-    position: sticky;
     top: 20px;
     box-shadow: 15px 8px 15px 6px rgba(0,0,0,0.85);
 }
@@ -157,8 +187,38 @@ input[type="number"]:focus{
     transition: 0.3s;
 }
 
+.resumo-acoes{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.continuar{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: 2px solid #60A5FA;
+    background: white;
+    color: #1d4ed8;
+    text-decoration: none;
+    font-weight: 700;
+    transition: background 0.2s ease;
+}
+
+.continuar:hover{
+    background: rgba(96, 165, 250, 0.12);
+}
+
 .finalizar:hover{
     background: rgb(2, 185, 18);
+}
+
+.finalizar:disabled{
+    opacity: 0.65;
+    cursor: not-allowed;
 }
 
 .recomendados{
@@ -272,6 +332,44 @@ input[type="number"]:focus{
 {
     transform: scale(1.1);
     box-shadow: 4px 4px 7px #5AE24E68;
+}
+
+@media (max-width: 1040px) {
+    .carrinho{
+        grid-template-columns: 1fr;
+        padding: 30px;
+    }
+
+    .resumo{
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 680px) {
+    .carrinho{
+        gap: 24px;
+        padding: 20px;
+    }
+
+    .produto{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .produto img{
+        width: 100%;
+        height: auto;
+    }
+
+    .acoes{
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .recomendados{
+        padding: 0;
+    }
 }
 
 .card img {

@@ -4,52 +4,65 @@ $css = './css/estoque2.css';
 require_once 'partials/navbar.php';
 require_once 'crud.php';
 
-$produtos = readAll($pdo, 'produtos');
-$id = null;
+$mensagemSucesso = null;
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
-if(isset($_GET['p_editar'])){
-    $id = $_GET['p_editar'];
-    $dar_erro = true;
-    foreach($produtos as $produto){
-        if($id == $produto['id_produto']){
-            $dar_erro = false;
-        }
-    }
-    if ($dar_erro === true){
-        header('Location: estoque.php?erro=erro_linkinvalido');
-        die();  
-    }
-} else {
+if (!$id) {
     header('Location: estoque.php?erro=erro_linkinvalido');
-    die();
+    exit;
 }
 
-$produto = read($pdo, 'produtos', 'id_produto ='.$id);
-$desc = (isset($produto['descricao']) && !empty($produto['descricao'])) ? $produto['descricao'] : 'Este produto não possui descrição.';
+$produto = read($pdo, 'produtos', 'id_produto = '.$id);
 
+if (!$produto) {
+    header('Location: estoque.php?erro=erro_linkinvalido');
+    exit;
+}
+
+$desc = (!empty($produto['descricao'])) ? $produto['descricao'] : 'Este produto não possui descrição.';
 ?>
 <body>
     <main>
-        <div class="box">
-            <h1 class="margem_baixo"><?= $produto['nome_produto'] ?></h1>
+        <section class="box">
+            <div class="header-info">
+                <div>
+                    <h1 class="produto-titulo"><?= htmlspecialchars($produto['nome_produto']) ?></h1>
+                    <p class="subtitulo">Conheça mais sobre este produto e veja todos os detalhes antes de continuar.</p>
+                </div>
+                <span class="etiqueta">Categoria: <?= htmlspecialchars($produto['categoria']) ?></span>
+            </div>
+
             <div class="info">
-                <img src="<?= $produto['imagem'] ?>" alt="Imagem do Produto">
+                <figure class="image-wrapper">
+                    <img src="<?= htmlspecialchars($produto['imagem']) ?>" alt="Imagem de <?= htmlspecialchars($produto['nome_produto']) ?>">
+                </figure>
+
                 <div class="desc">
-                    <p><?= $desc ?></p>
-                    <div class="abaixo">
-                        <p>R$ <?= number_format($produto['preco'], 2, ',', '.') ?></p>
-                        <p>Tipo: <?= $produto['categoria'] ?></p>
+                    <div class="descricao-card">
+                        <h2>Descrição</h2>
+                        <p><?= htmlspecialchars($desc) ?></p>
+                    </div>
+
+                    <div class="detalhes">
+                        <div class="preco">R$ <?= number_format($produto['preco'], 2, ',', '.') ?></div>
+                        <div class="info-meta">
+                            <span><strong>ID:</strong> <?= htmlspecialchars($produto['id_produto']) ?></span>
+                            <span><strong>Tipo:</strong> <?= htmlspecialchars($produto['categoria']) ?></span>
+                        </div>
                     </div>
                 </div>
             </div>
 
+            <?php if ($mensagemSucesso): ?>
+                <div class="mensagem-sucesso"><?= htmlspecialchars($mensagemSucesso) ?></div>
+            <?php endif; ?>
+
             <div class="box2">
-                <form class="box3" action="form_update.php" method="GET">
-                    <button name="id" value="<?= $id ?>" class="edit" type="submit">Editar produto</button>
-                    <a href="estoque.php" class="voltar">Voltar ao estoque</a>
+                <form class="box3" action="carrinho.php?id=<?= $id ?>" method="POST">
+                    <button type="submit" name="acao" value="adicionar" class="edit">Adicionar ao carrinho</button>
                 </form>
             </div>
-        </div>
+        </section>
     </main>
 </body>
 </html>

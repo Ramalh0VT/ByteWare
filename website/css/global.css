@@ -156,9 +156,21 @@ a
 
 .user{
     display: flex;
-    gap: 10px;
+    gap: 40px;
     color: white;
     align-items: center;
+}
+
+.perfil
+{
+    display: flex;
+    gap: 10px;
+    align-items: ceter;
+}
+
+.sair
+{
+    font-size: 30px;
 }
 
 .foto

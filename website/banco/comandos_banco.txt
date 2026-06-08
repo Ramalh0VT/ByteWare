@@ -1,23 +1,25 @@
-CREATE TABLE IF NOT EXISTS administradores(
+select * FROM administradores;
+select * from produtos;
+
+
+
+DROP TABLE administradores;
+DROP TABLE produtos;
+DROP TABLE clientes;
+DROP TABLE compras;
+
+
+CREATE TABLE IF NOT EXISTS administradores (
 id_administrador INT PRIMARY KEY AUTO_INCREMENT,
 nome_administrador VARCHAR(200) UNIQUE NOT NULL,
-rad VARCHAR(14) UNIQUE NOT NULL,
+rad VARCHAR(11) UNIQUE NOT NULL,
 email VARCHAR(500) UNIQUE NOT NULL,
 senha VARCHAR(1000) NOT NULL
 );
 
-INSERT INTO administradores (nome_administrador, rad, email, senha)
-VALUES ( ‘Enzo’, rad, [enzoRadAdm@byteware.com](mailto:enzoRadAdm@byteware.com), 123),
-( ‘Fernando’, rad, [fernandoRadAdm@byteware.com](mailto:fernandoRadAdm@byteware.com), 123),
-( ‘Gustavo’, rad, [gustavoRadAdm@byteware.com](mailto:gustavoRadAdm@byteware.com), 123),
-( ‘Ítalo’, rad, [italoRadAdm@byteware.com](mailto:italoRadAdm@byteware.com), 123)
-( ‘Lívia, rad, [liviaRadAdm@byteware.com](mailto:liviaRadAdm@byteware.com),  123);
 
----
 
----
-
-CREATE TABLE IF NOT EXISTS clientes(
+CREATE TABLE IF NOT EXISTS clientes (
 id_cliente INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(200) UNIQUE NOT NULL,
 cnpj VARCHAR(18) UNIQUE NOT NULL,
@@ -25,23 +27,9 @@ email VARCHAR(500) UNIQUE NOT NULL,
 senha VARCHAR(1000) NOT NULL
 );
 
----
 
----
 
-CREATE TABLE IF NOT EXISTS profissionais(
-id_profissional INT PRIMARY KEY AUTO_INCREMENT,
-re VARCHAR(100) NOT NULL UNIQUE,
-nome VARCHAR(200) NOT NULL,
-cpf VARCHAR(14) NOT NULL,
-salario NUMERIC(14,2)
-);
-
----
-
----
-
-CREATE TABLE IF NOT EXISTS produtos(
+CREATE TABLE IF NOT EXISTS produtos (
 id_produto INT PRIMARY KEY AUTO_INCREMENT,
 nome_produto VARCHAR(200) NOT NULL,
 pn VARCHAR(255) NOT NULL UNIQUE,
@@ -49,35 +37,82 @@ estoque INT NOT NULL,
 categoria VARCHAR(500) NOT NULL,
 preco NUMERIC(14,2) NOT NULL,
 descricao VARCHAR(1000) NOT NULL,
-ficha_tecnica
-imagem
-status BOOLEAN NOT NULL
+imagem VARCHAR (1000) NOT NULL,
+status BOOLEAN NOT NULL,
 id_administrador INT,
 CONSTRAINT fk_administrador
 FOREIGN KEY (id_administrador)
 REFERENCES administradores(id_administrador)
 );
 
----
 
----
 
-CREATE TABLE IF NOT EXISTS compra (
-    id_compra INT PRIMARY KEY AUTO_INCREMENT,
-    id_cliente INT NOT NULL,
-    id_produto INT NOT NULL,
-    CONSTRAINT fk_cliente FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
-    CONSTRAINT fk_produto FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
-);
-
----
-
----
-
-CREATE TABLE IF NOT EXISTS alocacao(
-id_alocacao INT PRIMARY KEY
+CREATE TABLE IF NOT EXISTS compras (
+id_compra INT PRIMARY KEY AUTO_INCREMENT,
 id_cliente INT,
 id_produto INT,
-CONSTRAINT fk_cliente2 FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
-CONSTRAINT fk_produto2 FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
+CONSTRAINT fk_cliente FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
+CONSTRAINT fk_produto FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
 );
+
+
+
+/*======================================================================================*/
+
+
+
+INSERT INTO administradores VALUES (default, 'Enzo Saroa', 100051-41, 'enzo10005141Adm@byteware.com', 123),
+(default, 'Fernando Lopes', 100065-18, 'fernando10006518Adm@byteware.com', 123),
+(default, 'Gustavo Ramalho', 100072-15, 'gustavo10007215Adm@byteware.com', 123),
+(default, 'Ítalo Salas', 100092-03, 'italo10009203Adm@byteware.com', 123),
+(default, 'Lívia Pagiato', 100012-94, 'livia10001294Adm@byteware.com',  123);
+
+
+
+
+SHOW TABLES;
+
+
+INSERT INTO produtos VALUES 
+(default, 'Sensor fotoelétrico difuso Omron', 'E3Z-D61', 161, 'sensor', 38.99, 'O Omron E3Z-D61 é um sensor fotoelétrico difuso compacto desenvolvido para aplicações de automação industrial que exigem detecção precisa de objetos sem contato físico. Utiliza emissão e recepção óptica integradas em um único corpo, permitindo identificar a presença de materiais por reflexão da luz emitida. Possui alta resistência mecânica, proteção contra interferências externas, resposta rápida e excelente estabilidade operacional, sendo amplamente utilizado em esteiras transportadoras, sistemas de contagem, posicionamento de peças e processos automatizados.', 'imagens/sensorE3.jpg', true, 4),
+(default, 'Sensor indutivo Pepperl+Fuchs', 'NBB5-18GM50-E2',  432, 'sensor', 189.90, 'O sensor indutivo Pepperl+Fuchs NBB5-18GM50-E2 é um dispositivo eletrônico projetado para detecção sem contato de objetos metálicos em ambientes industriais. Seu princípio de funcionamento baseia-se na alteração de um campo eletromagnético gerado internamente quando um objeto metálico entra em sua área de sensibilidade. Apresenta elevada confiabilidade, resistência a vibrações, longa vida útil e excelente desempenho em linhas automatizadas, sendo indicado para sistemas de posicionamento, monitoramento e controle industrial.', 'imagens/sensor indutivoNBB5.jpg', true, 4),
+(default, 'Sensor capacitivo Sick', 'CM18-08NPP-KW1', 888, 'sensor', 215.50, 'O Sick CM18-08NPP-KW1 é um sensor capacitivo de alto desempenho capaz de detectar materiais metálicos e não metálicos, incluindo líquidos, plásticos, vidro e granulados. Seu funcionamento ocorre pela variação da capacitância gerada pela aproximação de materiais ao campo elétrico sensível do sensor. Compacto e robusto, oferece ajuste preciso de sensibilidade, elevada confiabilidade operacional e ampla aplicação em processos industriais de nível, presença, enchimento e controle de materiais.', 'imagens/sensor capacitivoCM18.jpg', true, 4),
+(default, 'Sensor fotoelétrico WEG', 'PSW18-5DP', 230, 'sensor', 129.90, 'O sensor fotoelétrico WEG PSW18-5DP foi desenvolvido para detecção precisa de objetos em aplicações industriais automatizadas. Opera por meio da emissão e recepção de feixe luminoso, identificando a presença de corpos pela reflexão ou interrupção da luz. Possui construção robusta, alta velocidade de resposta, excelente imunidade a ruídos elétricos e grande confiabilidade, sendo indicado para sistemas de esteiras, controle de presença, automação logística e monitoramento de processos industriais.', 'imagens/Sensor fotoelétrico WEG5DP.jpg', true, 4),
+(default, 'Sensor indutivo Schneider', 'XS618B1PAL2', 746, 'sensor', 178.90, 'O Schneider XS618B1PAL2 é um sensor indutivo cilíndrico destinado à detecção precisa de objetos metálicos sem necessidade de contato físico. Seu funcionamento é baseado na perturbação de um campo eletromagnético gerado internamente, garantindo elevada precisão e repetibilidade. Desenvolvido para aplicações industriais exigentes, apresenta resistência mecânica, durabilidade e excelente estabilidade, sendo amplamente empregado em sistemas de automação, posicionamento, controle de fim de curso e monitoramento de movimento.', 'imagens/sensor SchneiderXS6.jpg', true, 4),
+(default, 'Sensor ultrassônico IFM', 'UGT594', 821, 'sensor', 529.90, 'O IFM UGT594 é um sensor ultrassônico de alta precisão projetado para medição e detecção sem contato em aplicações industriais complexas. Utiliza pulsos ultrassônicos para determinar distância ou presença de objetos, independentemente de cor, transparência ou brilho da superfície. Sua tecnologia oferece alta precisão, excelente repetibilidade e confiabilidade mesmo em ambientes adversos, sendo ideal para controle de nível, posicionamento, medição de distância e automação avançada.', 'imagens/sensorultrassônicoUGT592.jpg', true, 4),
+(default, 'Sensor magnético Balluff', 'BMF 235K-PS-C-2A-SA2-S49',  124, 'sensor', 320.00, 'O Balluff BMF 235K-PS-C-2A-SA2-S49 é um sensor magnético desenvolvido para monitoramento preciso de posição em cilindros pneumáticos e sistemas automatizados. Detecta campos magnéticos gerados por ímãs permanentes acoplados ao mecanismo monitorado, garantindo comutação confiável e resposta rápida. Compacto, robusto e resistente a ambientes industriais severos, é amplamente utilizado em automação pneumática, controle de posição e sistemas de monitoramento industrial de alta precisão.', 'imagens/bmf.jpg', true, 4),
+(default, 'Siemens SIMATIC S7-1200 CPU', '6ES7212-1BE40-0XB0', 915, 'clp', 1899.00, 'O Siemens SIMATIC S7-1200 é um controlador lógico programável modular desenvolvido para aplicações de automação industrial de pequeno e médio porte. Possui arquitetura compacta, alta capacidade de processamento e comunicação integrada, permitindo controle preciso de processos automatizados. Compatível com expansão de módulos digitais e analógicos, oferece flexibilidade para aplicações em máquinas industriais, sistemas de manufatura, linhas de produção e integração com redes industriais, garantindo confiabilidade, escalabilidade e excelente desempenho operacional.', 'imagens/Siemens SIMATIC.jpg', true, 4),
+(default, 'Schneider Modicon M221', 'TM221CE16R', 100, 'clp', 1499.00, 'O Schneider Modicon M221 é um CLP compacto de alto desempenho projetado para automação de máquinas e processos industriais. Equipado com portas de comunicação Ethernet integradas, permite programação, monitoramento e integração simplificada com sistemas supervisórios e outros dispositivos industriais. Sua arquitetura robusta oferece excelente velocidade de processamento, confiabilidade operacional e suporte para expansão modular, sendo amplamente aplicado em controle de máquinas, automação predial e processos industriais automatizados.', 'imagens/TM221CE16R.jpg', true, 4),
+(default, 'WEG CLIC02', 'CLW-02/20HR-A', 224, 'clp', 1190.00, 'O WEG CLIC02 é um controlador lógico programável compacto voltado para aplicações industriais de pequeno porte que exigem controle confiável e eficiente. Desenvolvido com foco em simplicidade de programação e robustez operacional, oferece entradas e saídas integradas, elevada estabilidade e compatibilidade com diversos protocolos industriais. É indicado para automação de máquinas, controle de processos discretos, sistemas de acionamento e soluções industriais que demandam flexibilidade e baixo custo operacional.', 'imagens/WEG CLIC02.jpg', true, 4),
+(default, 'Allen-Bradley Micro820', '2080-LC20-20QWB', 770, 'clp', 2100.00, 'O Allen-Bradley Micro820 é um microcontrolador programável avançado desenvolvido para aplicações industriais compactas que exigem alta precisão e conectividade. Integra recursos avançados de comunicação, processamento eficiente e capacidade de expansão modular, permitindo o desenvolvimento de soluções escaláveis. Sua confiabilidade e flexibilidade tornam-no ideal para controle de máquinas independentes, automação discreta, monitoramento de processos e integração em ambientes industriais modernos.', 'imagens/allen-brad.jpg', true, 4),
+(default, 'Omron CP1E', 'CP1E-N30DR-A', 772, 'clp', 1450.00, 'O Omron CP1E é um controlador lógico programável compacto projetado para aplicações industriais que exigem alta confiabilidade e facilidade de implementação. Possui excelente capacidade de processamento, programação intuitiva e integração com sistemas industriais diversos. Seu desempenho consistente o torna adequado para automação de máquinas, controle sequencial, monitoramento de entradas e saídas e aplicações industriais que necessitam de precisão e estabilidade operacional.', 'imagens/Micro820.jpg', true, 4),
+(default, 'Delta DVP14SS2', 'DVP14SS211R', 576, 'clp', 950.00, 'O Delta DVP14SS2 é um controlador lógico programável econômico e eficiente, ideal para automação industrial de pequeno porte. Sua estrutura compacta oferece processamento rápido, estabilidade operacional e compatibilidade com expansão modular, permitindo flexibilidade na implementação de soluções automatizadas. É amplamente utilizado em máquinas compactas, automação predial, controle de processos discretos e sistemas industriais que demandam excelente relação custo-benefício.', 'imagens/Omron CP1E.jpg', true, 4),
+(default, 'Mitsubishi FX5U', 'FX5U-32MR/ES', 576, 'clp', 2890.00, 'O Mitsubishi FX5U pertence à linha MELSEC iQ-F e representa uma solução avançada para automação industrial de alto desempenho. Combina elevada velocidade de processamento, ampla capacidade de memória, comunicação integrada e recursos avançados de controle, permitindo aplicações complexas e de alta precisão. Sua arquitetura escalável suporta expansão modular e integração com redes industriais modernas, sendo amplamente empregado em manufatura automatizada, controle de máquinas de alta performance e processos industriais críticos.', 'imagens/Delta DVP14SS2.jpg', true, 4),
+(default, 'Siemens KTP700 Basic', '6AV2123-2GB03-0AX0', 104, 'ihm', 2300.00, 'A Siemens KTP700 Basic é uma interface homem-máquina industrial desenvolvida para supervisão, monitoramento e operação de processos automatizados. Equipada com tela touchscreen colorida de alta resolução, permite visualização clara de parâmetros operacionais, alarmes e estados do sistema em tempo real. Sua integração nativa com controladores Siemens garante comunicação rápida e confiável, sendo amplamente utilizada em linhas de produção, painéis de comando e sistemas industriais que exigem interação intuitiva entre operador e máquina.', 'imagens/Siemens KTP700.jpg', true, 4),
+(default, 'Schneider HMIGTO', 'HMIGTO2310', 236, 'ihm', 3100.00, 'A Schneider HMIGTO2310 é uma interface gráfica touchscreen de alto desempenho projetada para controle e supervisão industrial. Possui recursos avançados de visualização, alta capacidade de processamento gráfico e excelente conectividade com CLPs e sistemas supervisórios. Sua construção robusta e operação intuitiva permitem monitoramento eficiente de variáveis de processo, diagnóstico de falhas e interação segura com sistemas automatizados, sendo ideal para aplicações industriais exigentes.', 'imagens/Schneider HMIGTO.jpg', true, 4),
+(default, 'Wecon PI3070', 'PI3070i', 361, 'ihm', 1450.00, 'A Wecon PI3070i é uma interface homem-máquina compacta destinada ao monitoramento e controle de processos industriais automatizados. Seu display touchscreen oferece navegação intuitiva, rápida resposta e excelente visualização de dados operacionais. Compatível com diversos protocolos de comunicação industrial, proporciona integração eficiente com CLPs de diferentes fabricantes, sendo indicada para automação de máquinas, controle local de processos e supervisão industrial de pequeno e médio porte.', 'imagens/Wecon PI3070.jpg', true, 4),
+(default, 'Delta DOP-107BV', 'DOP-107BV', 16, 'ihm', 1650.00, 'A Delta DOP-107BV é uma interface touchscreen industrial desenvolvida para visualização, parametrização e operação de sistemas automatizados. Possui tela colorida de alta nitidez, excelente desempenho gráfico e comunicação eficiente com controladores industriais. Sua arquitetura permite desenvolvimento de interfaces personalizadas para monitoramento em tempo real, controle operacional e diagnóstico de falhas, sendo amplamente utilizada em automação de máquinas e processos industriais.', 'imagens/Delta DOP.jpg', true, 4),
+(default, 'Mitsubishi GOT2000', 'GT2104-RTBD', 635, 'ihm', 2900.00, 'A Mitsubishi GOT2000 GT2104-RTBD é uma interface homem-máquina de alta performance voltada para aplicações industriais avançadas. Oferece processamento gráfico superior, excelente capacidade de comunicação e interface responsiva para supervisão precisa de sistemas automatizados. Sua robustez operacional e recursos avançados de diagnóstico tornam o equipamento ideal para ambientes industriais complexos, onde confiabilidade, desempenho e visualização eficiente são essenciais.', 'imagens/Mitsubishi GOT2000.jpg', true, 4),
+(default, 'Omron NB7W', 'NB7W-TW00B', 471, 'ihm', 2100.00, 'A Omron NB7W é uma interface touchscreen industrial desenvolvida para proporcionar operação intuitiva e supervisão eficiente de processos automatizados. Seu display de alta resolução permite visualização clara de dados operacionais, gráficos e alarmes, enquanto sua compatibilidade com controladores industriais assegura integração estável e segura. É amplamente aplicada em máquinas industriais, linhas automatizadas e sistemas de monitoramento em tempo real.', 'imagens/Omron NB7W.jpg', true, 4),
+(default, 'WEG cMT3072X', 'cMT3072X', 374, 'ihm', 2450.00, 'A WEG cMT3072X é uma interface homem-máquina multitouch de última geração desenvolvida para supervisão industrial moderna. Possui tela de alta definição, operação responsiva e suporte avançado para conectividade com múltiplos dispositivos industriais. Seu desempenho gráfico e recursos de integração permitem criação de interfaces sofisticadas para monitoramento, controle remoto e análise operacional, sendo ideal para ambientes industriais que exigem flexibilidade, conectividade e eficiência operacional.', 'imagens/WEG cMT3072X.jpg', true, 4),
+(default, 'Fonte Siemens SITOP', '6EP1332-1SH71', 593, 'fonte_industrial', 780.00, 'A Siemens SITOP 6EP1332-1SH71 é uma fonte de alimentação industrial chaveada desenvolvida para fornecer tensão contínua estabilizada com alta confiabilidade em sistemas de automação. Projetada para montagem em trilho DIN, oferece excelente eficiência energética, proteção contra sobrecarga, curto-circuito e sobretensão, garantindo operação segura e contínua. Sua robustez e estabilidade tornam este equipamento ideal para painéis elétricos, CLPs, sensores, IHMs e aplicações industriais críticas que exigem alimentação constante e precisa.', 'imagens/Fonte Siemens.jpg', true, 4),
+(default, 'Fonte WEG', 'PSW02424', 692, 'fonte_industrial', 320.00, 'A WEG PSW02424 é uma fonte de alimentação industrial compacta projetada para conversão eficiente de energia em aplicações automatizadas. Desenvolvida para fornecer tensão contínua estável, conta com proteção eletrônica integrada contra curto-circuito, sobrecorrente e superaquecimento. Sua construção robusta e confiável garante excelente desempenho em ambientes industriais, sendo amplamente utilizada para alimentação de sensores, relés, CLPs e dispositivos de automação.', 'imagens/Fonte WEG.jpg', true, 4),
+(default, 'Fonte Mean Well trilho DIN', 'HDR-60-24', 684, 'fonte_industrial', 210.00, 'A Mean Well HDR-60-24 é uma fonte chaveada ultracompacta para montagem em trilho DIN, desenvolvida para aplicações industriais e prediais. Seu projeto de alta eficiência proporciona baixo aquecimento, excelente estabilidade de tensão e confiabilidade operacional. Conta com proteção contra sobrecarga, sobretensão e curto-circuito, sendo ideal para alimentação de controladores, módulos eletrônicos, sensores e sistemas de automação que demandam fornecimento contínuo e seguro de energia.', 'imagens/Fonte Mean.jpg', true, 4),
+(default, 'Fonte Phoenix Contact', '2904602', 50, 'fonte_industrial', 690.00, 'A Phoenix Contact 2904602 é uma fonte de alimentação industrial de alta confiabilidade projetada para aplicações críticas de automação e controle. Oferece excelente regulação de tensão, elevada resistência a variações elétricas e recursos avançados de proteção contra falhas. Seu design otimizado para trilho DIN facilita a instalação em painéis elétricos compactos, proporcionando alimentação segura e estável para equipamentos industriais sensíveis.', 'imagens/Fonte Phoenix.jpg', true, 4),
+(default, 'Fonte Schneider Phaseo', 'ABL8MEM24030', 665, 'fonte_industrial', 590.00, 'A Schneider Phaseo ABL8MEM24030 é uma fonte de alimentação industrial regulada destinada a fornecer energia estável e segura para sistemas automatizados. Desenvolvida com alta eficiência energética e excelente desempenho térmico, possui proteção integrada contra falhas elétricas e operação contínua confiável. É amplamente empregada em painéis industriais, sistemas de controle, automação predial e alimentação de dispositivos eletrônicos industriais.', 'imagens/Fonte Schneider.jpg', true, 4),
+(default, 'Fonte Omron S8VK', 'S8VK-G12024', 511, 'fonte_industrial', 730.00, 'A Omron S8VK-G12024 é uma fonte de alimentação industrial compacta de alto desempenho desenvolvida para aplicações de automação que exigem confiabilidade e eficiência. Seu projeto otimizado oferece excelente dissipação térmica, alta durabilidade e estabilidade de tensão mesmo sob condições severas de operação. Possui proteção eletrônica avançada e é indicada para alimentação de CLPs, sensores, IHMs e sistemas eletrônicos industriais.', 'imagens/Fonte Omron.jpg', true, 4),
+(default, 'Fonte Allen-Bradley', '1606-XLE240E', 76, 'fonte_industrial', 920.00, 'A Allen-Bradley 1606-XLE240E é uma fonte de alimentação industrial premium projetada para aplicações de alto desempenho e máxima confiabilidade. Fornece tensão contínua estabilizada com elevada eficiência energética, excelente imunidade a distúrbios elétricos e ampla proteção eletrônica integrada. Sua robustez construtiva e confiabilidade operacional fazem dela uma solução ideal para sistemas críticos de automação, controle industrial avançado e infraestrutura elétrica de precisão.', 'imagens/Fonte Allen.jpg', true, 4),
+(default, 'Relé Finder', '40.52.9.024.0000', 575, 'reles', 49.90, 'O relé Finder 40.52.9.024.0000 é um dispositivo eletromecânico desenvolvido para aplicações de comando, interface e automação industrial. Seu funcionamento baseia-se no acionamento eletromagnético de contatos, permitindo o chaveamento seguro de circuitos elétricos de controle e potência. Possui elevada confiabilidade, longa vida útil mecânica e excelente desempenho operacional, sendo amplamente utilizado em painéis elétricos, sistemas automatizados e circuitos de intertravamento industrial.', 'imagens/finder.jpg', true, 4),
+(default, 'Relé Omron MY2N', 'MY2N-GS DC24', 71, 'reles', 52.90, 'O Omron MY2N-GS DC24 é um relé auxiliar industrial de uso geral projetado para operações de comutação em sistemas de automação e controle. Equipado com contatos de alta durabilidade e excelente estabilidade elétrica, proporciona acionamento preciso e confiável em aplicações industriais contínuas. Sua construção robusta e fácil instalação o tornam ideal para circuitos de comando, lógica de controle e automação de máquinas.', 'imagens/omron.jpg', true, 4),
+(default, 'Relé Schneider Zelio', 'RXM2AB2BD', 476, 'reles', 68.90, 'O Schneider Zelio RXM2AB2BD é um relé plug-in industrial desenvolvido para integração em sistemas de automação, controle e sinalização elétrica. Projetado para oferecer elevada confiabilidade e repetibilidade operacional, permite o chaveamento eficiente de cargas em circuitos industriais. Sua compatibilidade com bases modulares facilita a instalação e manutenção, sendo amplamente empregado em painéis de comando, automação predial e processos industriais automatizados.', 'imagens/schneider_zelio.jpg', true, 4),
+(default, 'Relé WEG', 'RW27-1D3-D24', 870, 'reles', 39.90, 'O relé WEG RW27-1D3-D24 é um componente eletromecânico destinado ao acionamento e controle de circuitos industriais. Desenvolvido com foco em confiabilidade e desempenho contínuo, oferece excelente capacidade de comutação, resistência mecânica e longa vida útil. É indicado para aplicações em painéis elétricos, automação industrial, intertravamentos lógicos e sistemas de comando que exigem precisão e segurança operacional.', 'imagens/WEG.jpg', true, 4),
+(default, 'Relé Siemens Sirius', '3RH1921-1FA22', 479, 'reles', 88.90, 'O Siemens Sirius 3RH1921-1FA22 é um relé auxiliar modular desenvolvido para aplicações industriais que exigem alta confiabilidade no chaveamento de circuitos de comando. Integrante da linha Sirius, oferece excelente robustez mecânica, rápida resposta operacional e compatibilidade com sistemas industriais modernos. É amplamente utilizado em lógica de comando, expansão de contatos auxiliares, sinalização e automação de processos industriais complexos.', 'imagens/siemens_sirius.jpg', true, 4),
+(default, 'Relé Phoenix Contact', '2961105', 132, 'reles', 74.90, 'O relé Phoenix Contact 2961105 é um relé de interface industrial projetado para isolamento, amplificação e comutação segura de sinais elétricos em sistemas automatizados. Sua construção compacta permite instalação otimizada em trilho DIN, enquanto sua elevada confiabilidade garante desempenho estável mesmo em aplicações críticas. É amplamente empregado em automação industrial, painéis de controle e sistemas de interface entre CLPs e dispositivos de campo.', 'imagens/phoenix.jpg', true, 4),
+(default, 'Relé ABB', 'CR-M024DC4', 317, 'reles', 62.90, 'O ABB CR-M024DC4 é um relé auxiliar compacto desenvolvido para aplicações industriais de controle, comando e interface elétrica. Possui excelente desempenho de chaveamento, elevada resistência elétrica e longa vida útil operacional, proporcionando segurança e estabilidade em sistemas automatizados. Sua versatilidade permite aplicação em painéis industriais, sistemas de automação predial e circuitos de controle que exigem confiabilidade contínua.', 'imagens/rele_ABB.jpg', true, 4),
+(default, 'WEG CFW500', 'CFW500A01P6S2NB20', 918, 'inversor_frequencia', 1450.00, 'O WEG CFW500 é um inversor de frequência de alto desempenho desenvolvido para controle preciso de motores de indução trifásicos em aplicações industriais. Projetado para oferecer elevada eficiência energética, controle vetorial avançado e excelente estabilidade operacional, permite ajustes finos de velocidade, torque e aceleração. Sua arquitetura modular facilita integração em sistemas automatizados, sendo amplamente aplicado em transportadores, bombas, ventiladores, compressores e máquinas industriais que exigem controle dinâmico e confiável.', 'imagens/WDC.jpg', true, 4),
+(default, 'Siemens SINAMICS V20', '6SL3210-5BE13-7CV0', 781, 'inversor_frequencia', 1720.00, 'O Siemens SINAMICS V20 é um inversor de frequência compacto e robusto projetado para aplicações industriais que demandam controle eficiente de velocidade e redução de consumo energético. Desenvolvido com recursos avançados de parametrização, proteção integrada e resposta dinâmica precisa, proporciona excelente desempenho em motores trifásicos. É amplamente utilizado em sistemas de bombeamento, ventilação, automação predial e processos industriais que exigem simplicidade operacional e alta confiabilidade.', 'imagens/siemens.jpg', true, 4),
+(default, 'Schneider Altivar 320', 'ATV320U07N4C', 62, 'inversor_frequencia', 1890.00, 'O Schneider Altivar 320 é um inversor de frequência desenvolvido para máquinas industriais compactas e aplicações que exigem elevado desempenho dinâmico. Conta com controle vetorial preciso, recursos avançados de comunicação industrial e elevada capacidade de adaptação a diferentes cargas. Sua tecnologia proporciona economia energética, proteção abrangente do motor e integração facilitada em arquiteturas de automação, sendo ideal para esteiras, máquinas de embalagem, elevadores e processos industriais automatizados.', 'imagens/Schneider.jpg', true, 4),
+(default, 'ABB ACS355', 'ACS355-03E-04A1-4', 118, 'inversor_frequencia', 1650.00, 'O ABB ACS355 é um inversor de frequência versátil e compacto destinado ao controle eficiente de motores em aplicações industriais de velocidade variável. Seu sistema de controle vetorial sem sensor garante excelente precisão de torque e estabilidade operacional. Possui interface intuitiva, parametrização simplificada e múltiplos recursos de proteção, tornando-o adequado para transportadores, misturadores, bombas, ventiladores e equipamentos industriais que demandam confiabilidade contínua.', 'imagens/ABB.jpg', true, 4),
+(default, 'Delta VFD-EL', 'VFD007EL43A', 0, 'inversor_frequencia', 1190.00, 'O Delta VFD-EL é um inversor de frequência microprocessado desenvolvido para aplicações industriais leves e médias que exigem controle preciso de velocidade e excelente custo-benefício. Equipado com funções de controle vetorial, frenagem dinâmica e parametrização simplificada, oferece alta estabilidade operacional e proteção abrangente para o motor. É amplamente empregado em sistemas de ventilação, automação predial, pequenas máquinas industriais e aplicações de controle contínuo.', 'imagens/delta.jpg', false, 4),
+(default, 'Yaskawa GA500', 'GA50C4001ABA', 524, 'inversor_frequencia', 2140.00, 'O Yaskawa GA500 é um inversor de frequência de última geração projetado para aplicações industriais que exigem elevado desempenho, flexibilidade de integração e máxima confiabilidade. Seu controle vetorial avançado proporciona excelente resposta dinâmica, alta precisão de torque e operação eficiente em ampla faixa de velocidades. Sua arquitetura compacta, conectividade industrial e recursos inteligentes o tornam ideal para máquinas modernas, sistemas automatizados e processos industriais complexos.', 'imagens/yaskawa.jpg', true, 4),
+(default, 'Mitsubishi FR-D700', 'FR-D740-036SC-EC', 796, 'inversor_frequencia', 1580.00, 'O Mitsubishi FR-D700 é um inversor de frequência compacto desenvolvido para controle preciso e eficiente de motores trifásicos em aplicações industriais diversas. Oferece excelente desempenho de aceleração, desaceleração e controle de torque, além de recursos avançados de proteção eletrônica e parametrização intuitiva. Sua confiabilidade operacional e facilidade de integração fazem dele uma solução amplamente utilizada em esteiras, bombas, ventiladores, sistemas de movimentação e automação industrial.', 'imagens/Mitsubishi.jpg', true, 4);
